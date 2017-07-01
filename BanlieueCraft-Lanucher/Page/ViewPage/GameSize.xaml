@@ -1,0 +1,20 @@
+﻿<Window x:Class="BanlieueCraft_Lanucher.GameSize"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+        mc:Ignorable="d"
+        Title="GameSize" WindowStyle="None" Background="#FF1A1D33" Height="230" Width="320" AllowsTransparency="True" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="18" Margin="10,23,0,0" TextWrapping="Wrap" Text="请设置最大内存" VerticalAlignment="Top" Width="113"/>
+        <Line  X1="20" Y1="60" X2="70" Y2="60" Stroke="#FF484A5C" StrokeThickness="1"></Line>
+        <Line  X1="70" Y1="60" X2="75" Y2="70" Stroke="#FF484A5C" StrokeThickness="1"></Line>
+        <Line  X1="75" Y1="70" X2="80" Y2="60" Stroke="#FF484A5C" StrokeThickness="1"></Line>
+        <Line  X1="80" Y1="60" X2="300" Y2="60" Stroke="#FF484A5C" StrokeThickness="1"></Line>
+        <TextBox Width="80" Height="30" Style="{StaticResource ClearButtonTextBox}" Margin="43,95,197,105" local:ControlAttachProperty.Watermark="长度"></TextBox>
+        <TextBlock Width="30" Height="30" Text="X" TextAlignment="Center" FontSize="20"></TextBlock>
+        <TextBox Width="80" Height="30" Style="{StaticResource ClearButtonTextBox}" Margin="190,95,50,105" local:ControlAttachProperty.Watermark="宽度"></TextBox>
+        <Button Click="button_Click" x:Name="button" Content="确定" HorizontalAlignment="Left" Template="{StaticResource Tc}" Height="33" VerticalAlignment="Top" Width="100" Foreground="White" Margin="103,187,0,0"/>
+    </Grid>
+</Window>

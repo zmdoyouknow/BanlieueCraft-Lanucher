@@ -1,0 +1,21 @@
+﻿<Page x:Class="BanlieueCraft_Lanucher.Page.Game"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+      mc:Ignorable="d" Loaded="Page_Loaded"
+      d:DesignHeight="478" d:DesignWidth="681"
+      Title="Page" >
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="24,27,503,216" Width="154" Height="235">
+            <Button Name="image" Width="154" Height="198"  Style="{StaticResource Image}"/>
+            <ComboBox Name="version" FontSize="16" Width="155" Height="20"  Foreground="White" FontWeight="Bold" Margin="-1,-20,0,0" Style="{StaticResource DefaultComboBox}" Tag="{Binding RealVer}" Background="#FF32344D" VerticalAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            </ComboBox>
+            <Button Name="button" Click="button_Click" Template="{StaticResource Start}" Width="154" Height="38"  Content="启动游戏" Background="#FF26CBC1" FontFamily="Microsoft YaHei" FontSize="16" FontWeight="ExtraBlack"></Button>
+        </StackPanel>
+        
+        <Frame Name="frame" NavigationUIVisibility="Hidden"></Frame>
+    </Grid>
+</Page>

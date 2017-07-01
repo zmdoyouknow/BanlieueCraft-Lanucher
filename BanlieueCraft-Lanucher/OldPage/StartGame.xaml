@@ -1,0 +1,53 @@
+﻿<Page x:Class="BanlieueCraft_Lanucher.Page.StartGame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+      mc:Ignorable="d" 
+      d:DesignHeight="478" d:DesignWidth="681" Loaded="Page_Loaded"
+      Title="StartGame">
+
+    <Grid Name="grid">
+        <ListView BorderThickness="0" Name="Listview" MouseWheel="Listview_MouseWheel" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Background="{x:Null}" Margin="0,0,0,145">
+            <ListView.View>
+                <GridView >
+                    <GridView.Columns>
+                        <GridViewColumn >
+                            <GridViewColumnHeader></GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <StackPanel Orientation="Vertical" Margin="10,20,10,10">
+                                            <Image Name="image" Width="154" Height="198"  Stretch="Fill" Source="{Binding ImageSource}"/>
+                                            <TextBlock Name="version" Tag="{Binding version}"  Text="{Binding ver}" TextAlignment="Center" FontSize="16" Width="154" Height="20"  Foreground="White" FontWeight="Bold" Margin="0,-20,0,0"/>
+                                            <Button Click="polygon_Click" Name="polygon" Template="{StaticResource Sjx}" Margin="134,-376,0,0" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="置顶"></Button>
+                                            <Canvas Name="canvas" Background="Black" Opacity="0" Width="154" Height="178" Margin="0,-200,0,0">
+                                                <Button Content="222" Width="40" Height="40"></Button>
+                                            </Canvas>
+                                            <Button Name="button" Click="button_Click" Tag="{Binding version}" Template="{StaticResource Start}" Width="154" Height="38"  Content="启动游戏" AutomationProperties.HelpText="33" Background="#FF26CBC1" FontFamily="Microsoft YaHei" FontSize="16" FontWeight="ExtraBlack"></Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Polygon Name="kp" Width="25" Height="25" Fill="Black" Margin="535,351,96,77" ></Polygon>
+        <StackPanel Margin="306,300,365,168">
+            <Button Click="Button_Click_1" Width="10" Height="10" Template="{StaticResource Page}" ToolTip="首页"></Button>
+        </StackPanel>
+        <StackPanel Margin="321,300,350,168">
+            <Button Click="Button_Click_2" Width="10" Height="10" Template="{StaticResource Page}" ToolTip="上一页"></Button>
+        </StackPanel>
+        <StackPanel Margin="336,300,335,168">
+            <Button Click="Button_Click_3" Width="10" Height="10" Template="{StaticResource Page}" ToolTip="下一页"></Button>
+        </StackPanel>
+        <StackPanel Margin="351,300,320,168">
+            <Button Click="Button_Click_4" Width="10" Height="10" Template="{StaticResource Page}" ToolTip="尾页"></Button>
+        </StackPanel>
+
+    </Grid>
+</Page>

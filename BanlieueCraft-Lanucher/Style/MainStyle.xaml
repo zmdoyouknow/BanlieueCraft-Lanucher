@@ -1,0 +1,402 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BanlieueCraft_Lanucher">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Style/Icon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <ControlTemplate x:Key="Login" TargetType="Button">
+        <Border Name="Border"  BorderBrush="#555975" BorderThickness="1" CornerRadius="15,15,15,15" Background="#222641" Cursor="Hand" >
+            <TextBlock Name="txt" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FF00DCC8" TargetName="Border"></Setter>
+            </Trigger>
+            <Trigger Property ="IsPressed" Value="True">
+                <Setter Property="BorderBrush" Value="#FF00FFE8" TargetName="Border"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Tc" TargetType="Button">
+        <Border Name="Border"  BorderBrush="Aqua" BorderThickness="1" CornerRadius="15,15,15,15" Background="Aqua" Cursor="Hand" >
+            <TextBlock Name="txt" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FF00DCC8" TargetName="Border"></Setter>
+            </Trigger>
+            <Trigger Property ="IsPressed" Value="True">
+                <Setter Property="BorderBrush" Value="#FF00FFE8" TargetName="Border"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Tubiao1" TargetType="Button">
+        <StackPanel Name="st" Cursor="Hand" >
+            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe66b;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t1"></Setter>
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t2"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Tubiao2" TargetType="Button">
+        <StackPanel Name="st" Cursor="Hand" >
+            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe6ff;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t1"></Setter>
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t2"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Tubiao3" TargetType="Button">
+        <StackPanel Name="st" Cursor="Hand" >
+            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe659;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t1"></Setter>
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t2"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Tubiao4" TargetType="Button">
+        <StackPanel Name="st" Cursor="Hand" >
+            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe796;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t1"></Setter>
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t2"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="Image" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Width="154" Height="198">
+                        <Image Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Source="/BanlieueCraft-Lanucher;component/Resources/mc.png" Stretch="Fill"></Image>
+                        <Polygon Name="po1" Width="15" Height="15" Points="0, 0 15, 15 15, 0" Fill="Aqua" Margin="139,0,0,183"/>
+                        <Grid Name="grid" Visibility="Hidden">
+                            <Button Template="{DynamicResource Sjx}"></Button>
+                            <!--<Polygon Width="40" Height="40" Points="0, 0 40, 40 40, 0" Fill="Aqua"/>
+                            <TextBlock Foreground="#FF094E4D" Text="..." TextAlignment="Justify" Margin="20,-5,0,0" FontWeight="Bold" FontSize="18"/>-->
+                        </Grid>
+                        <!--<Grid Name="gg" Width="154" Height="198" Visibility="Visible">
+                            <Button Content="路径" Width="40" Height="40" Margin="30,30,84,128" Template="{StaticResource tubiao1}"></Button>
+                            <Button  Width="40" Height="40" Margin="80,30,24,128"></Button>
+                            <Button  Width="40" Height="40" Margin="30,128,84,30"></Button>
+                            <Button  Width="40" Height="40" Margin="80,128,24,30"></Button>
+                        </Grid>-->
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" Value="Hidden" TargetName="po1"></Setter>
+                            <Setter Property="Visibility" Value="Visible" TargetName="grid"></Setter>
+                            <!--<Setter Property="Visibility" Value="Visible" TargetName="gg"></Setter>-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Back" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Name="border" Background="Transparent">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="txt" Text="&#xe615;" Style="{StaticResource Icon}" Width="20" Height="20"></TextBlock>
+                            <TextBlock  Text="{TemplateBinding ContentControl.Content}" Width="60" Height="20" FontSize="16"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#FF06F5B4" TargetName="txt"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <ControlTemplate x:Key="Sjx" TargetType="Button">
+        <Grid>
+            <Grid Margin="114,0,0,158">
+                <Polygon Width="40" Height="40" Points="0, 0 40, 40 40, 0" Fill="Aqua"/>
+                <TextBlock Foreground="#FF094E4D" Text="..." TextAlignment="Justify" Margin="20,-5,0,0" FontWeight="Bold" FontSize="18"/>
+            </Grid>
+            <Grid Name="grid" Visibility="Hidden" Width="154" Height="198" Background="#858fb1" Opacity="0.8">
+                <Button Command="{Binding Way}" Content="路径" Width="40" Height="40" Margin="30,30,84,128" Template="{StaticResource Tubiao1}"></Button>
+                <Button Command="{Binding Java}" Content="JAVA" Width="40" Height="40" Margin="80,30,24,128" Template="{StaticResource Tubiao2}"></Button>
+                <Button Command="{Binding Memory}" Content="内存" Width="40" Height="40" Margin="30,128,84,30" Template="{StaticResource Tubiao3}"></Button>
+                <Button Command="{Binding Size}" Content="分辨率" Width="40" Height="40" Margin="80,128,24,30" Template="{StaticResource Tubiao4}"></Button>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Visibility" Value="Visible" TargetName="grid"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="Select" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Name="Border" >
+                        <TextBlock Name="txt" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#222641" TargetName="Border"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GameVersion" TargetType="Button">
+        <Setter Property="Background" Value="#FF23273A"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Name="Border" >
+                        <TextBlock Name="txt" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#FF00C8B6" TargetName="Border"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Page" TargetType="Button">
+        <Border Name="Border"  BorderBrush="Transparent" BorderThickness="1" CornerRadius="15,15,15,15" Background="#858fb1" Cursor="Hand" >
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF00FFE8" TargetName="Border"></Setter>
+            </Trigger>
+            <Trigger Property ="IsPressed" Value="True">
+                <Setter Property="Background" Value="White" TargetName="Border"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Start" TargetType="Button">
+        <Border Name="Border"  BorderBrush="#FF26CBC1" BorderThickness="1" CornerRadius="0,0,2,2" Background="#FF26CBC1" Cursor="Hand" >
+            <TextBlock Name="txt" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FF38E5D6" TargetName="Border"></Setter>
+            </Trigger>
+            <Trigger Property ="IsPressed" Value="True">
+                <Setter Property="BorderBrush" Value="#FF27C3B5" TargetName="Border"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SaveSetting" TargetType="Button">
+        <Border Name="Border"  BorderBrush="#555975" BorderThickness="1" CornerRadius="2,2,2,2" Background="#222641" Cursor="Hand" >
+            <TextBlock Name="txt" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#FF00DCC8" TargetName="Border"></Setter>
+                <Setter Property="Foreground" Value="#FF00DCC8" TargetName="txt"></Setter>
+            </Trigger>
+            <Trigger Property ="IsPressed" Value="True">
+                <Setter Property="BorderBrush" Value="#FF00FFE8" TargetName="Border"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="PageButton1" TargetType="ToggleButton">
+        <Grid Name="Grid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <Grid Name="Grid1">
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                <TextBlock Name="Text01" Width="4" Height="38" Margin="0,0,16,0"></TextBlock>
+                    <TextBlock Name="Image" Text="&#xe67e;"
+                           Style="{DynamicResource Icon}" FontSize="24" Width="24" Height="24" Margin="0,0,5,10"></TextBlock>
+                <TextBlock Name="Text02" Foreground="White" Width="97" Height="38" Margin="5,10,94,10" TextAlignment="Left" Text="{TemplateBinding ContentControl.Content}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.5,0.5" ></TextBlock>
+            </StackPanel>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#252e4e" TargetName="Grid"></Setter>
+                <Setter Property="RenderTransform" TargetName="Grid1">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.05" CenterX="0" CenterY="0"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#232b4b" TargetName="Grid"></Setter>
+                <Setter Property="Background" Value="#FF00FFE8" TargetName="Text01"></Setter>
+                <Setter Property="Foreground" Value="#FF00FFE8" TargetName="Image"></Setter>
+                <Setter Property="Foreground" Value="White" TargetName="Text02"></Setter>
+                <Setter Property="RenderTransform" TargetName="Grid1">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1" CenterX="0" CenterY="0"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PageButton2" TargetType="ToggleButton">
+        <Grid Name="Grid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <Grid Name="Grid1">
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                <TextBlock Name="Text01" Width="4" Height="38" Margin="0,0,16,0"></TextBlock>
+                    <TextBlock Name="Image" Text="&#xe61d;"
+                           Style="{DynamicResource Icon}" FontSize="24" Width="24" Height="24" Margin="0,0,5,10"></TextBlock>
+                <TextBlock Name="Text02" Foreground="White" Width="97" Height="38" Margin="5,10,94,10" TextAlignment="Left" Text="{TemplateBinding ContentControl.Content}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.5,0.5" ></TextBlock>
+            </StackPanel>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#252e4e" TargetName="Grid"></Setter>
+                <Setter Property="RenderTransform" TargetName="Grid1">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.05" CenterX="0" CenterY="0"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#232b4b" TargetName="Grid"></Setter>
+                <Setter Property="Background" Value="#FF00FFE8" TargetName="Text01"></Setter>
+                <Setter Property="Foreground" Value="#FF00FFE8" TargetName="Image"></Setter>
+                <Setter Property="Foreground" Value="White" TargetName="Text02"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PageButton3" TargetType="ToggleButton">
+        <Grid Name="Grid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <Grid Name="Grid1">
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                <TextBlock Name="Text01" Width="4" Height="38" Margin="0,0,16,0"></TextBlock>
+                    <TextBlock Name="Image" Text="&#xe639;"
+                           Style="{DynamicResource Icon}" FontSize="24" Width="24" Height="24" Margin="0,0,5,10"></TextBlock>
+                <TextBlock Name="Text02" Foreground="White" Width="97" Height="38" Margin="5,10,94,10" TextAlignment="Left" Text="{TemplateBinding ContentControl.Content}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.5,0.5" ></TextBlock>
+            </StackPanel>
+                </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#252e4e" TargetName="Grid"></Setter>
+                <Setter Property="RenderTransform" TargetName="Grid1">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.05" CenterX="0" CenterY="0"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#232b4b" TargetName="Grid"></Setter>
+                <Setter Property="Background" Value="#FF00FFE8" TargetName="Text01"></Setter>
+                <Setter Property="Foreground" Value="#FF00FFE8" TargetName="Image"></Setter>
+                <Setter Property="Foreground" Value="White" TargetName="Text02"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PageButton4" TargetType="ToggleButton">
+        <Grid Name="Grid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <Grid Name="Grid1">
+            <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                <TextBlock Name="Text01" Width="4" Height="38" Margin="0,0,16,0"></TextBlock>
+                    <TextBlock Name="Image" Text="&#xe639;"
+                           Style="{DynamicResource Icon}" FontSize="24" Width="24" Height="24" Margin="0,0,5,10"></TextBlock>
+                <TextBlock Name="Text02" Foreground="White" Width="97" Height="38" Margin="5,10,94,10" TextAlignment="Left" Text="{TemplateBinding ContentControl.Content}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.5,0.5" ></TextBlock>
+            </StackPanel>
+                </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#252e4e" TargetName="Grid"></Setter>
+                <Setter Property="RenderTransform" TargetName="Grid1">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.05" CenterX="0" CenterY="0"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#232b4b" TargetName="Grid"></Setter>
+                <Setter Property="Background" Value="#FF00FFE8" TargetName="Text01"></Setter>
+                <Setter Property="Foreground" Value="#FF00FFE8" TargetName="Image"></Setter>
+                <Setter Property="Foreground" Value="White" TargetName="Text02"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--GridView Header样式 去除Gridview自带的Header框-->
+    <Style TargetType="{x:Type GridViewColumnHeader}" >
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Visibility" Value="Hidden"/>
+        <Setter Property="Height" Value="0"></Setter>
+    </Style>
+    <!--ListView 布局样式 使图片可以横向展示-->
+    <Style  TargetType="{x:Type ListView}" >
+        <Setter Property='ItemsPanel'>
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel  Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource   AncestorType=ScrollContentPresenter}}"></WrapPanel>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ListView Item样式和点击后样式模板-->
+    <ControlTemplate x:Key="ListViewItemTemplate" TargetType="ListBoxItem">
+        <Border Name="Border">
+            <StackPanel>
+                <GridViewRowPresenter>
+                </GridViewRowPresenter>
+            </StackPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter TargetName="Border"  Property="BorderBrush" Value="Red"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Border"  Property="Background" Value="{x:Null}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--ListView Item样式和点击后样式-->
+    <Style x:Key="{x:Type ListViewItem}"  TargetType="ListViewItem">
+        <Setter Property="Template" Value="{StaticResource ListViewItemTemplate}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+    </Style>
+</ResourceDictionary>
