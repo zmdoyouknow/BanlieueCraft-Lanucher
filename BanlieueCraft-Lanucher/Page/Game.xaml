@@ -4,18 +4,22 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
-      mc:Ignorable="d" Loaded="Page_Loaded"
+      mc:Ignorable="d" 
       d:DesignHeight="478" d:DesignWidth="681"
       Title="Page" >
 
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="24,27,503,216" Width="154" Height="235">
-            <Button Name="image" Width="154" Height="198"  Style="{StaticResource Image}"/>
-            <ComboBox Name="version" FontSize="16" Width="155" Height="20"  Foreground="White" FontWeight="Bold" Margin="-1,-20,0,0" Style="{StaticResource DefaultComboBox}" Tag="{Binding RealVer}" Background="#FF32344D" VerticalAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            </ComboBox>
-            <Button Name="button" Click="button_Click" Template="{StaticResource Start}" Width="154" Height="38"  Content="启动游戏" Background="#FF26CBC1" FontFamily="Microsoft YaHei" FontSize="16" FontWeight="ExtraBlack"></Button>
-        </StackPanel>
-        
-        <Frame Name="frame" NavigationUIVisibility="Hidden"></Frame>
+        <TabControl x:Name="TabControl" Style="{ StaticResource TopTabControl}" local:ControlAttachProperty.FocusBackground="{x:Null}" HorizontalAlignment="Center" Height="478" VerticalAlignment="Top" Width="681" BorderBrush="{x:Null}" Margin="0,1,0,0">
+            <TabItem Header="单机模式"  Margin="5,0" Width="150" local:ControlAttachProperty.FIcon="&#xe60c;">
+                <Grid Loaded="Grid_Loaded_1">
+                    <Frame Name="Frame1" NavigationUIVisibility="Hidden"></Frame>
+                </Grid>
+            </TabItem>
+            <TabItem Header="服务器模式" Margin="5,0" Width="150" local:ControlAttachProperty.FIcon="&#xe632;">
+                <Grid Loaded="Grid_Loaded">
+                    <Frame Name="Frame" NavigationUIVisibility="Hidden"></Frame>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

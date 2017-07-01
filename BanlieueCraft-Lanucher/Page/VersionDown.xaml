@@ -9,7 +9,7 @@
       Title="PlayerData">
 
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="477" Style="{StaticResource TopTabControl}" VerticalAlignment="Top" Width="681" Margin="0,1,0,0">
+        <TabControl x:Name="TabControl" HorizontalAlignment="Left" Height="477" Style="{StaticResource TopTabControl}" VerticalAlignment="Top" Width="681" Margin="0,1,0,0">
             <TabItem Header="版本下载" local:ControlAttachProperty.FIcon="&#xe62a;" Width="170">
                 <Grid Background="Transparent" Loaded="Grid_Loaded">
                     <ListView Style="{StaticResource DefaultListView}" x:Name="listView" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0">

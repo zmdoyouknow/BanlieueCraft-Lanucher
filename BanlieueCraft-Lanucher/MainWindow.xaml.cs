@@ -92,7 +92,7 @@ namespace BanlieueCraft_Lanucher
 
         private void Server()
         {
-            var mcinfo = new MCQuery.MCQuery();
+            var mcinfo = new MCQuery.McQuery();
             string host = "127.0.0.1";
             mcinfo.Connect(host);
             if (mcinfo.Success())

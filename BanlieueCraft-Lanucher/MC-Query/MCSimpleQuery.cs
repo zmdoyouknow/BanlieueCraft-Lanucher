@@ -2,13 +2,13 @@
 
 namespace MCQuery
 {
-    public class MCSimpleQuery : ServerQuery
+    public class McSimpleQuery : ServerQuery
     {
-        private bool success = false;
-        private ServerInfo info;
+        private bool _success = false;
+        private ServerInfo _info;
 
-        public bool Success () { return success; }
-        public ServerInfo Info () { return info; }
+        public bool Success () { return _success; }
+        public ServerInfo Info () { return _info; }
 
         public void Connect (string host, int port = 25565, double timeout = 2.5)
         {
@@ -43,19 +43,19 @@ namespace MCQuery
                     // MC 1.4 and later?
                     bits = packet.Split(new string[1] { "\x00\x00\x00" }, System.StringSplitOptions.None);
 
-                    info = new ServerInfo();
+                    _info = new ServerInfo();
 
-                    info.Latency = System.Environment.TickCount - start;
+                    _info.Latency = System.Environment.TickCount - start;
 
-                    if (!double.TryParse(bits[1].Replace("\x00", ""), out info.Protocol)) return;
+                    if (!double.TryParse(bits[1].Replace("\x00", ""), out _info.Protocol)) return;
 
-                    info.Version = bits[2].Replace("\x00", "");
-                    info.Name = bits[3].Replace("\x00", "");
+                    _info.Version = bits[2].Replace("\x00", "");
+                    _info.Name = bits[3].Replace("\x00", "");
 
-                    if (!int.TryParse(bits[4].Replace("\x00", ""), out info.OnlinePlayers)) return;
-                    if (!int.TryParse(bits[5].Replace("\x00", ""), out info.MaxPlayers)) return;
+                    if (!int.TryParse(bits[4].Replace("\x00", ""), out _info.OnlinePlayers)) return;
+                    if (!int.TryParse(bits[5].Replace("\x00", ""), out _info.MaxPlayers)) return;
 
-                    success = true;
+                    _success = true;
                     return;
                 }
                 else
@@ -63,26 +63,26 @@ namespace MCQuery
                     // Earlier versions
                     bits = packet.Split(new char[1] { '\xA7' });
 
-                    info = new ServerInfo();
+                    _info = new ServerInfo();
 
-                    info.Latency = System.Environment.TickCount - start;
+                    _info.Latency = System.Environment.TickCount - start;
 
-                    info.Version = "1.3";
-                    info.Name = bits[0].Replace("\x00", "");
+                    _info.Version = "1.3";
+                    _info.Name = bits[0].Replace("\x00", "");
 
                     if (bits.Length > 1)
-                        if (!int.TryParse(bits[4].Replace("\x00", ""), out info.OnlinePlayers)) return;
+                        if (!int.TryParse(bits[4].Replace("\x00", ""), out _info.OnlinePlayers)) return;
 
                     if (bits.Length > 2)
-                        if (!int.TryParse(bits[5].Replace("\x00", ""), out info.MaxPlayers)) return;
+                        if (!int.TryParse(bits[5].Replace("\x00", ""), out _info.MaxPlayers)) return;
 
-                    success = true;
+                    _success = true;
                     return;
                 }
             }
             catch
             {
-                success = false;
+                _success = false;
             }
         }
     }

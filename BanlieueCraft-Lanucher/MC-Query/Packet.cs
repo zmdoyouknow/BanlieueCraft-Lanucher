@@ -134,7 +134,7 @@ namespace MCQuery
                 }
             }
 
-            else throw new NotSupportedException("Unsupported type for writing: " + T.Name);
+            else throw new NotSupportedException("写入类型不支持: " + T.Name);
         }
 
         internal R Read<R> (Int32 offset = 0)
@@ -236,7 +236,7 @@ namespace MCQuery
                 return ret;
             }
 
-            else throw new NotSupportedException("Unsupported type for reading: " + T.Name);
+            else throw new NotSupportedException("读取的类型不支持: " + T.Name);
 
             return default(R);
         }
@@ -251,7 +251,7 @@ namespace MCQuery
             if (this.location + offset <= this.buffer.Length)
                 return true;
             else
-                throw new IndexOutOfRangeException("Data exceeded bounds. Type: " + type_name);
+                throw new IndexOutOfRangeException("数据太大了，数据类型: " + type_name);
         }
     }
 }

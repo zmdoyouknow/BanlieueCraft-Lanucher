@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
       mc:Ignorable="d" Loaded="Page_Loaded" 
-      d:DesignHeight="478" d:DesignWidth="681"
+      d:DesignHeight="438" d:DesignWidth="681"
       Title="GameVersion">
 
     <Grid Name="grid" Background="#F2181B2C" >
@@ -15,9 +15,9 @@
                 <GradientStop Color="#F2181B2C" Offset="0"/>
             </LinearGradientBrush>
         </Grid.OpacityMask>
-        <TextBlock x:Name="textBlock" Height="23" TextWrapping="Wrap" Text="选择版本" TextAlignment="Center" Width="102" FontSize="18" FontWeight="Bold" Foreground="White" Margin="26,30,553,425"/>
-        <TextBlock Height="23" Margin="0,412,0,44" TextAlignment="Center" TextWrapping="Wrap" Text="版本说明：OF->OptiFine版本   LF->LiteLoader-Forge版本   FG->Forge版本   LL->LiteLoader版本" FontSize="12" FontWeight="Bold" Foreground="White"></TextBlock>
-        <ListView BorderThickness="0" Name="Listview" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Background="{x:Null}" Margin="0,58,0,71">
+        <TextBlock x:Name="textBlock" Height="23" TextWrapping="Wrap" Text="选择版本" TextAlignment="Center" Width="102" FontSize="18" FontWeight="Bold" Foreground="White" Margin="26,31,553,384"/>
+        <TextBlock Height="23" Margin="0,368,0,47" TextAlignment="Center" TextWrapping="Wrap" Text="版本说明：OF->OptiFine版本   LF->LiteLoader-Forge版本   FG->Forge版本   LL->LiteLoader版本" FontSize="12" FontWeight="Bold" Foreground="White"></TextBlock>
+        <ListView BorderThickness="0" Name="Listview" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Background="{x:Null}" Margin="0,20,0,70">
             <ListView.View>
                 <GridView >
                     <GridView.Columns>
@@ -37,7 +37,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Click="button_Click_1" x:Name="button" Content="" HorizontalAlignment="Left" Height="29" Margin="26,439,0,0" VerticalAlignment="Top" Style="{StaticResource Back}" Width="28" Cursor="Hand"/>
+        <Button Click="button_Click_1" x:Name="Button" Content="" HorizontalAlignment="Left" Height="29" Margin="26,399,0,0" VerticalAlignment="Top" Style="{StaticResource Back}" Width="28" Cursor="Hand"/>
         <Grid.Resources>
             <Storyboard x:Key="shrink">
                 <DoubleAnimation From="1" To="0" Duration="0:0:1"

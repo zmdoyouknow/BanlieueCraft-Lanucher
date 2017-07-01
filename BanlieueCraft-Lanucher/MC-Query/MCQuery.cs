@@ -6,51 +6,51 @@ using System.Net;
 
 namespace MCQuery
 {
-    public class MCQuery : ServerQuery
+    public class McQuery : ServerQuery
     {
-        private bool success = false;
-        private ServerInfo info;
-        private int challenge = 0;
-        private int SID = 0;
-        private int ping = 0;
+        private bool _success = false;
+        private ServerInfo _info;
+        private int _challenge = 0;
+        private int _sid = 0;
+        private int _ping = 0;
 
-        private Socket sock;
+        private Socket _sock;
 
-        public bool Success () { return success; }
-        public ServerInfo Info () { return info; }
+        public bool Success () { return _success; }
+        public ServerInfo Info () { return _info; }
 
         public void Connect (string host, int port = 25565, double timeout = 2.5)
         {
             try
             {
-                sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                _sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-                if (sock == null) return;
+                if (_sock == null) return;
 
-                sock.Connect(host, port);
-                sock.ReceiveTimeout = (int)(timeout * 1000);
-                sock.SendTimeout = (int)(timeout * 1000);
+                _sock.Connect(host, port);
+                _sock.ReceiveTimeout = (int)(timeout * 1000);
+                _sock.SendTimeout = (int)(timeout * 1000);
 
                 this.GetChallenge();
             }
             catch
             {
-                success = false;
+                _success = false;
             }
         }
 
         internal void GetChallenge ()
         {
-            SID = new Random().Next() & 0xCF;
-            Packet data = this.GrabData(Packets.Challenge(this.SID));
-            if (data.Read<byte>() == (byte)0x09 && data.Read<int>() == this.SID)
+            _sid = new Random().Next() & 0xCF;
+            Packet data = this.GrabData(Packets.Challenge(this._sid));
+            if (data.Read<byte>() == (byte)0x09 && data.Read<int>() == this._sid)
             {
-                int.TryParse(data.Read<String>(), out this.challenge);
-                byte[] iabi = BitConverter.GetBytes(this.challenge);
+                int.TryParse(data.Read<String>(), out this._challenge);
+                byte[] iabi = BitConverter.GetBytes(this._challenge);
                 Array.Reverse(iabi);
-                this.challenge = BitConverter.ToInt32(iabi, 0);
+                this._challenge = BitConverter.ToInt32(iabi, 0);
 
-                ping = Environment.TickCount;
+                _ping = Environment.TickCount;
 
                 this.GetInfo();
             }
@@ -59,7 +59,7 @@ namespace MCQuery
 
         internal void GetInfo ()
         {
-            Packet data = this.GrabData(Packets.QueryData(this.SID, this.challenge));
+            Packet data = this.GrabData(Packets.QueryData(this._sid, this._challenge));
 
             if (data == null)
             {
@@ -67,11 +67,11 @@ namespace MCQuery
                 return;
             }
 
-            if (data.Read<byte>() == (byte)0x00 && data.Read<int>() == this.SID)
+            if (data.Read<byte>() == (byte)0x00 && data.Read<int>() == this._sid)
             {
-                info = new ServerInfo();
+                _info = new ServerInfo();
 
-                info.Latency = Environment.TickCount - ping;
+                _info.Latency = Environment.TickCount - _ping;
 
                 data.Skip(11); // Unknown padding.
 
@@ -85,43 +85,43 @@ namespace MCQuery
                     if (key.Length == 0) break;
 
                     if (key == "hostname")
-                        info.Name = value;
+                        _info.Name = value;
 
                     else if (key == "gametype")
-                        info.GameType = value;
+                        _info.GameType = value;
 
                     else if (key == "game_id")
-                        info.GameID = value;
+                        _info.GameID = value;
 
                     else if (key == "version")
-                        info.Version = value;
+                        _info.Version = value;
 
                     else if (key == "plugins")
-                        info.Plugins = value;
+                        _info.Plugins = value;
 
                     else if (key == "map")
-                        info.Map = value;
+                        _info.Map = value;
 
                     else if (key == "numplayers")
                     {
-                        if (!int.TryParse(value, out info.OnlinePlayers)) return;
+                        if (!int.TryParse(value, out _info.OnlinePlayers)) return;
                     }
 
                     else if (key == "maxplayers")
                     {
-                        if (!int.TryParse(value, out info.MaxPlayers)) return;
+                        if (!int.TryParse(value, out _info.MaxPlayers)) return;
                     }
 
                     else if (key == "hostport")
-                        info.HostPort = value;
+                        _info.HostPort = value;
 
                     else if (key == "hostip")
-                        info.HostIP = value;
+                        _info.HostIP = value;
                 }
 
                 data.Skip(1);
 
-                info.Players = new List<string>();
+                _info.Players = new List<string>();
 
                 while (true)
                 {
@@ -129,10 +129,10 @@ namespace MCQuery
 
                     if (key.Length == 0) break;
 
-                    info.Players.Add(key);
+                    _info.Players.Add(key);
                 }
 
-                success = true;
+                _success = true;
             }
             else GetChallenge();
         }
@@ -153,7 +153,7 @@ namespace MCQuery
             try
             {
                 byte[] buffer = new byte[len];
-                int recv = this.sock.Receive(buffer, 0, len, SocketFlags.None);
+                int recv = this._sock.Receive(buffer, 0, len, SocketFlags.None);
 
                 if (recv < 5 || buffer[0] != check)
                     return null;
@@ -173,7 +173,7 @@ namespace MCQuery
         {
             try
             {
-                sock.Send(data);
+                _sock.Send(data);
             }
             catch
             {
