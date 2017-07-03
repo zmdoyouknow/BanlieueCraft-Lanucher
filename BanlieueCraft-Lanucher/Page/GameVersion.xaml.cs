@@ -29,7 +29,7 @@ namespace BanlieueCraft_Lanucher.Page
             InitializeComponent();
             sb = (Storyboard)grid.Resources["spread"];
             //Game game = new Game();
-            ServerPage game = new ServerPage();
+            Game game = new Game();
             sb.Completed += (s, e) =>
             {
                 sb = (Storyboard)grid.Resources["shrink"];
@@ -99,7 +99,7 @@ namespace BanlieueCraft_Lanucher.Page
         private void button_Click(object sender, RoutedEventArgs e)
         {            
             Button bt = sender as Button;
-            ServerPage page = new ServerPage();
+            Game page = new Game();
             string file = Environment.CurrentDirectory;//读取路径
             string filepatch = file + @"\" + "config.ini"; //配置文件
             IniFile ini = new IniFile(filepatch);

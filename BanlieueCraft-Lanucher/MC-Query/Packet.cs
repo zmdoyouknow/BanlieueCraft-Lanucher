@@ -250,8 +250,7 @@ namespace MCQuery
         {
             if (this.location + offset <= this.buffer.Length)
                 return true;
-            else
-                throw new IndexOutOfRangeException("数据太大了，数据类型: " + type_name);
+            throw new IndexOutOfRangeException("数据太大了，数据类型: " + type_name);
         }
     }
 }

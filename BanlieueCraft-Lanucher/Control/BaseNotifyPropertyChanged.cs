@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Reflection;
 
-namespace System
+namespace BanlieueCraft_Lanucher.Control
 {
     /// <summary>
     /// 实现了属性更改通知的基类
     /// </summary>
-    public class BaseNotifyPropertyChanged : System.ComponentModel.INotifyPropertyChanged
+    public class BaseNotifyPropertyChanged : INotifyPropertyChanged
     {
         /// <summary>
         /// 属性值变化时发生
@@ -16,20 +15,21 @@ namespace System
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
         /// 属性值变化时发生
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <param name="propertyExpression"></param>
         protected virtual void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
-            var propertyName = (propertyExpression.Body as MemberExpression).Member.Name;
-            this.OnPropertyChanged(propertyName);
+            var memberExpression = propertyExpression.Body as MemberExpression;
+            if (memberExpression == null) return;
+            var propertyName = memberExpression.Member.Name;
+            OnPropertyChanged(propertyName);
         }
 
-        public virtual event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public virtual event PropertyChangedEventHandler PropertyChanged;
     }
 }

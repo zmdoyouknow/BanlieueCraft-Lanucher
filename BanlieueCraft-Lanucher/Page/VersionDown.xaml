@@ -4,13 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+      xmlns:control="clr-namespace:BanlieueCraft_Lanucher.Control"
       mc:Ignorable="d" Loaded="Page_Loaded"
       d:DesignHeight="478" d:DesignWidth="681"
       Title="PlayerData">
 
     <Grid>
         <TabControl x:Name="TabControl" HorizontalAlignment="Left" Height="477" Style="{StaticResource TopTabControl}" VerticalAlignment="Top" Width="681" Margin="0,1,0,0">
-            <TabItem Header="版本下载" local:ControlAttachProperty.FIcon="&#xe62a;" Width="170">
+            <TabItem Header="版本下载" control:ControlAttachProperty.FIcon="&#xe62a;" Width="170">
                 <Grid Background="Transparent" Loaded="Grid_Loaded">
                     <ListView Style="{StaticResource DefaultListView}" x:Name="listView" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0">
                         <ListView.View>
@@ -32,7 +33,7 @@
                     </ListView>
                 </Grid>
             </TabItem>
-            <TabItem Header="Forge下载" local:ControlAttachProperty.FIcon="&#xe631;" Width="170">
+            <TabItem Header="Forge下载" control:ControlAttachProperty.FIcon="&#xe631;" Width="170">
                 <Grid Background="Transparent" Loaded="Grid_Loaded_1">
                     <ListView Style="{StaticResource DefaultListView}" x:Name="listView1" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0">
                         <ListView.View>
@@ -54,10 +55,10 @@
                     </ListView>
                 </Grid>
             </TabItem>
-            <TabItem Header="LiteLoader下载" local:ControlAttachProperty.FIcon="&#xe61f;" Width="170">
+            <TabItem Header="LiteLoader下载" control:ControlAttachProperty.FIcon="&#xe61f;" Width="170">
                 <Grid Background="Transparent"/>
             </TabItem>
-            <TabItem Header="OptiFine下载" local:ControlAttachProperty.FIcon="&#xe64d;" Width="171">
+            <TabItem Header="OptiFine下载" control:ControlAttachProperty.FIcon="&#xe64d;" Width="171">
                 <Grid Background="Transparent"/>
             </TabItem>
         </TabControl>

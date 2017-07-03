@@ -1,19 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:BanlieueCraft_Lanucher">
+                    xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+                    xmlns:control="clr-namespace:BanlieueCraft_Lanucher.Control">
     <Style x:Key="FIconTabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Background" Value="{x:Null}"/>
         <Setter Property="Foreground" Value="{StaticResource TextForeground}" />
-        <Setter Property="local:ControlAttachProperty.FIcon" Value="&#xe618;"/>
-        <Setter Property="local:ControlAttachProperty.FIconSize" Value="26"/>
-        <Setter Property="local:ControlAttachProperty.CornerRadius" Value="0"/>
-        <Setter Property="local:ControlAttachProperty.FIconMargin" Value="0,0,2,0"/>
-        <Setter Property="local:ControlAttachProperty.FocusBackground" Value="{StaticResource ButtonPressedBackground}"/>
-        <Setter Property="local:ControlAttachProperty.FocusForeground" Value="{StaticResource ButtonMouseOverForeground}"/>
-        <Setter Property="local:ControlAttachProperty.MouseOverBackground" Value="{StaticResource ButtonMouseOverBackground}"/>
-        <Setter Property="local:ControlAttachProperty.MouseOverForeground" Value="{StaticResource ButtonPressedForeground}"/>
+        <Setter Property="control:ControlAttachProperty.FIcon" Value="&#xe618;"/>
+        <Setter Property="control:ControlAttachProperty.FIconSize" Value="26"/>
+        <Setter Property="control:ControlAttachProperty.CornerRadius" Value="0"/>
+        <Setter Property="control:ControlAttachProperty.FIconMargin" Value="0,0,2,0"/>
+        <Setter Property="control:ControlAttachProperty.FocusBackground" Value="{StaticResource ButtonPressedBackground}"/>
+        <Setter Property="control:ControlAttachProperty.FocusForeground" Value="{StaticResource ButtonMouseOverForeground}"/>
+        <Setter Property="control:ControlAttachProperty.MouseOverBackground" Value="{StaticResource ButtonMouseOverBackground}"/>
+        <Setter Property="control:ControlAttachProperty.MouseOverForeground" Value="{StaticResource ButtonPressedForeground}"/>
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="MinWidth" Value="20"/>
         <Setter Property="Margin" Value="0"/>
@@ -22,10 +23,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Border x:Name="border" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="True" ToolTip="{TemplateBinding ToolTip}"
-                            CornerRadius="{TemplateBinding local:ControlAttachProperty.CornerRadius}"  Background="{TemplateBinding Background}" >
+                            CornerRadius="{TemplateBinding control:ControlAttachProperty.CornerRadius}"  Background="{TemplateBinding Background}" >
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource Icon}" Text="{TemplateBinding local:ControlAttachProperty.FIcon}" Margin="{TemplateBinding local:ControlAttachProperty.FIconMargin}"
-                                       FontSize="{TemplateBinding local:ControlAttachProperty.FIconSize}" Foreground="{TemplateBinding Foreground}"/>
+                            <TextBlock Style="{StaticResource Icon}" Text="{TemplateBinding control:ControlAttachProperty.FIcon}" Margin="{TemplateBinding control:ControlAttachProperty.FIconMargin}"
+                                       FontSize="{TemplateBinding control:ControlAttachProperty.FIconSize}" Foreground="{TemplateBinding Foreground}"/>
                             <TextBlock x:Name="txtheader" VerticalAlignment="Center"  Text="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}"/>
                         </StackPanel>
                     </Border>
@@ -54,7 +55,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource ControlBorderBrush}" />
         <Setter Property="ItemContainerStyle" Value="{DynamicResource FIconTabItemStyle}"/>
         <Setter Property="TabStripPlacement" Value="Left"></Setter>
-        <Setter Property="local:ControlAttachProperty.FocusBackground" Value="{StaticResource ButtonPressedBackground}"/>
+        <Setter Property="control:ControlAttachProperty.FocusBackground" Value="{StaticResource ButtonPressedBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -64,7 +65,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border BorderBrush="{TemplateBinding local:ControlAttachProperty.FocusBackground}" BorderThickness="0,0,2,0" >
+                        <Border BorderBrush="{TemplateBinding control:ControlAttachProperty.FocusBackground}" BorderThickness="0,0,2,0" >
                             <StackPanel x:Name="HeaderPanel" Margin="0,5,0,5" Orientation="Vertical" IsItemsHost="True" ></StackPanel>
                         </Border>
 
@@ -90,7 +91,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource FIconTabItemStyle}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ControlBorderBrush}" />
         <Setter Property="TabStripPlacement" Value="Top"></Setter>
-        <Setter Property="local:ControlAttachProperty.FocusBackground" Value="{StaticResource ButtonPressedBackground}"/>
+        <Setter Property="control:ControlAttachProperty.FocusBackground" Value="{StaticResource ButtonPressedBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -100,7 +101,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                        
-                        <Border Grid.Row="0" BorderBrush="{TemplateBinding local:ControlAttachProperty.FocusBackground}" BorderThickness="0,0,0,2" >
+                        <Border Grid.Row="0" BorderBrush="{TemplateBinding control:ControlAttachProperty.FocusBackground}" BorderThickness="0,0,0,2" >
                             <StackPanel x:Name="HeaderPanel" Margin="0,0,0,0" Orientation="Horizontal" IsItemsHost="True"  HorizontalAlignment="Center"></StackPanel>
                         </Border>
 

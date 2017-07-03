@@ -35,8 +35,8 @@
 
     <ControlTemplate x:Key="Tubiao1" TargetType="Button">
         <StackPanel Name="st" Cursor="Hand" >
-            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe66b;" Style="{DynamicResource Icon}"></TextBlock>
-            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+            <TextBlock Name="t1" Width="20" Height="20" Text="&#xe66b;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="White" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
         </StackPanel>
         <ControlTemplate.Triggers>
             <Trigger Property ="IsMouseOver" Value="True">
@@ -48,8 +48,8 @@
 
     <ControlTemplate x:Key="Tubiao2" TargetType="Button">
         <StackPanel Name="st" Cursor="Hand" >
-            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe6ff;" Style="{DynamicResource Icon}"></TextBlock>
-            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+            <TextBlock Name="t1" Width="20" Height="20" Text="&#xe6ff;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="White" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
         </StackPanel>
         <ControlTemplate.Triggers>
             <Trigger Property ="IsMouseOver" Value="True">
@@ -61,8 +61,8 @@
 
     <ControlTemplate x:Key="Tubiao3" TargetType="Button">
         <StackPanel Name="st" Cursor="Hand" >
-            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe659;" Style="{DynamicResource Icon}"></TextBlock>
-            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+            <TextBlock Name="t1" Width="20" Height="20" Text="&#xe659;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="White" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
         </StackPanel>
         <ControlTemplate.Triggers>
             <Trigger Property ="IsMouseOver" Value="True">
@@ -74,8 +74,34 @@
 
     <ControlTemplate x:Key="Tubiao4" TargetType="Button">
         <StackPanel Name="st" Cursor="Hand" >
-            <TextBlock Name="t1" Width="20" Height="20" Foreground="#FFB3C1DC" Text="&#xe796;" Style="{DynamicResource Icon}"></TextBlock>
-            <TextBlock Name="t2" Width="40" Height="15" Foreground="#FFB3C1DC" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+            <TextBlock Name="t1" Width="20" Height="20" Text="&#xe796;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="White" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t1"></Setter>
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t2"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="Tubiao5" TargetType="Button">
+        <StackPanel Name="st" Cursor="Hand" >
+            <TextBlock Name="t1" Width="20" Height="20" Text="&#xe64e;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="White" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
+        </StackPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property ="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t1"></Setter>
+                <Setter Property="Foreground" Value="#FF08F3FC" TargetName="t2"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="Tubiao6" TargetType="Button">
+        <StackPanel Name="st" Cursor="Hand" >
+            <TextBlock Name="t1" Width="20" Height="20" Text="&#xe62a;" Style="{DynamicResource Icon}"></TextBlock>
+            <TextBlock Name="t2" Width="40" Height="15" Foreground="White" Margin="0,5,0,0" Text="{TemplateBinding Content}" TextAlignment="Center"></TextBlock>
         </StackPanel>
         <ControlTemplate.Triggers>
             <Trigger Property ="IsMouseOver" Value="True">
@@ -94,6 +120,7 @@
                     <Grid Width="154" Height="198">
                         <Image Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Source="/BanlieueCraft-Lanucher;component/Resources/mc.png" Stretch="Fill"></Image>
                         <Polygon Name="po1" Width="15" Height="15" Points="0, 0 15, 15 15, 0" Fill="Aqua" Margin="139,0,0,183"/>
+                        <Label Width="154" Height="30" Content="我的世界服务器" FontSize="14" FontWeight="Bold" Margin="0,170,0,0" Foreground="White" HorizontalContentAlignment="Center"></Label>
                         <Grid Name="grid" Visibility="Hidden">
                             <Button Template="{DynamicResource Sjx}"></Button>
                             <!--<Polygon Width="40" Height="40" Points="0, 0 40, 40 40, 0" Fill="Aqua"/>
@@ -146,11 +173,13 @@
                 <Polygon Width="40" Height="40" Points="0, 0 40, 40 40, 0" Fill="Aqua"/>
                 <TextBlock Foreground="#FF094E4D" Text="..." TextAlignment="Justify" Margin="20,-5,0,0" FontWeight="Bold" FontSize="18"/>
             </Grid>
-            <Grid Name="grid" Visibility="Hidden" Width="154" Height="198" Background="#858fb1" Opacity="0.8">
-                <Button Command="{Binding Way}" Content="路径" Width="40" Height="40" Margin="30,30,84,128" Template="{StaticResource Tubiao1}"></Button>
-                <Button Command="{Binding Java}" Content="JAVA" Width="40" Height="40" Margin="80,30,24,128" Template="{StaticResource Tubiao2}"></Button>
-                <Button Command="{Binding Memory}" Content="内存" Width="40" Height="40" Margin="30,128,84,30" Template="{StaticResource Tubiao3}"></Button>
-                <Button Command="{Binding Size}" Content="分辨率" Width="40" Height="40" Margin="80,128,24,30" Template="{StaticResource Tubiao4}"></Button>
+            <Grid Name="grid" Visibility="Hidden" Width="154" Height="198" Background="#FF39405A" Opacity="0.9">
+                <Button Command="{Binding Jiedian}" Content="节点" Width="40" Height="40" Margin="20,10,84,128" Template="{StaticResource Tubiao5}"></Button>
+                <Button Command="{Binding Vers}" Content="版本" Width="40" Height="40" Margin="60,10,0,128" Template="{StaticResource Tubiao6}"></Button>
+                <Button Command="{Binding Way}" Content="路径" Width="40" Height="40" Margin="20,30,84,30" Template="{StaticResource Tubiao1}"></Button>
+                <Button Command="{Binding Java}" Content="JAVA" Width="40" Height="40" Margin="60,30,0,30" Template="{StaticResource Tubiao2}"></Button>
+                <Button Command="{Binding Memory}" Content="内存" Width="40" Height="40" Margin="20,150,84,0" Template="{StaticResource Tubiao3}"></Button>
+                <Button Command="{Binding Size}" Content="分辨率" Width="40" Height="40" Margin="60,150,0,0" Template="{StaticResource Tubiao4}"></Button>
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>

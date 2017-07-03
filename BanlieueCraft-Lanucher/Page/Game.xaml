@@ -9,17 +9,11 @@
       Title="Page" >
 
     <Grid>
-        <TabControl x:Name="TabControl" Style="{ StaticResource TopTabControl}" local:ControlAttachProperty.FocusBackground="{x:Null}" HorizontalAlignment="Center" Height="478" VerticalAlignment="Top" Width="681" BorderBrush="{x:Null}" Margin="0,1,0,0">
-            <TabItem Header="单机模式"  Margin="5,0" Width="150" local:ControlAttachProperty.FIcon="&#xe60c;">
-                <Grid Loaded="Grid_Loaded_1">
-                    <Frame Name="Frame1" NavigationUIVisibility="Hidden"></Frame>
-                </Grid>
-            </TabItem>
-            <TabItem Header="服务器模式" Margin="5,0" Width="150" local:ControlAttachProperty.FIcon="&#xe632;">
-                <Grid Loaded="Grid_Loaded">
-                    <Frame Name="Frame" NavigationUIVisibility="Hidden"></Frame>
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <StackPanel Orientation="Vertical" Margin="39,10,486,193" Width="154" Height="235">
+            <Button Name="Image" Width="154" Height="198"  Style="{StaticResource Image}"/>
+            <Button Name="Button" Click="Button_Click" Template="{StaticResource Start}" Width="154" Height="38"  Content="启动游戏" Background="#FF26CBC1" FontFamily="Microsoft YaHei" FontSize="16" FontWeight="ExtraBlack"></Button>
+        </StackPanel>
+
+        <Frame Name="Frame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Page>

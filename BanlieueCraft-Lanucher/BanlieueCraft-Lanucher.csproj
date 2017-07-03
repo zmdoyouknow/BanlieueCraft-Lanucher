@@ -124,14 +124,8 @@
     <Compile Include="Page\DownRoad.xaml.cs">
       <DependentUpon>DownRoad.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\OfflinePage.xaml.cs">
-      <DependentUpon>OfflinePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Page\OtherWin\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Page\ServerPage.xaml.cs">
-      <DependentUpon>ServerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\ViewPage\GameJava.xaml.cs">
       <DependentUpon>GameJava.xaml</DependentUpon>
@@ -178,15 +172,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page\OfflinePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Page\OtherWin\Login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Page\ServerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,7 @@ using RichTextBox = System.Windows.Controls.RichTextBox;
 using TextBox = System.Windows.Controls.TextBox;
 
 
-namespace BanlieueCraft_Lanucher
+namespace BanlieueCraft_Lanucher.Control
 {
     /// <summary>
     /// 公共附加属性

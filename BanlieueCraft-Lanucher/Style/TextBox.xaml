@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:control="clr-namespace:BanlieueCraft_Lanucher.Control">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Corlor/Colors.xaml"/>
         <ResourceDictionary Source="/Style/Icon.xaml" />
@@ -18,8 +19,8 @@
         <Setter Property="Foreground" Value="{StaticResource TextForeground}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderBrush" Value="{StaticResource ControlBorderBrush}" />
-        <Setter Property="local:ControlAttachProperty.FocusBorderBrush" Value="{StaticResource FocusBorderBrush}" />
-        <Setter Property="local:ControlAttachProperty.MouseOverBorderBrush" Value="{StaticResource MouseOverBorderBrush}" />
+        <Setter Property="control:ControlAttachProperty.FocusBorderBrush" Value="{StaticResource FocusBorderBrush}" />
+        <Setter Property="control:ControlAttachProperty.MouseOverBorderBrush" Value="{StaticResource MouseOverBorderBrush}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <!-- change SnapsToDevicePixels to True to view a better border and validation error -->
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -30,7 +31,7 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid x:Name="PART_Root">
                         <Border x:Name="Bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                CornerRadius="{TemplateBinding local:ControlAttachProperty.CornerRadius}"
+                                CornerRadius="{TemplateBinding control:ControlAttachProperty.CornerRadius}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" />
                         <Grid x:Name="PART_InnerGrid">
                             <Grid.ColumnDefinitions>
@@ -39,20 +40,20 @@
                                 <ColumnDefinition  Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <!--Label区域-->
-                            <ContentControl x:Name="Label" Margin="1" Template="{TemplateBinding local:ControlAttachProperty.LabelTemplate}"
-                                            Content="{TemplateBinding local:ControlAttachProperty.Label}"/>
+                            <ContentControl x:Name="Label" Margin="1" Template="{TemplateBinding control:ControlAttachProperty.LabelTemplate}"
+                                            Content="{TemplateBinding control:ControlAttachProperty.Label}"/>
                             <!--内容区域-->
                             <ScrollViewer x:Name="PART_ContentHost" BorderThickness="0" Grid.Column="1" IsTabStop="False" Margin="2"
                                           VerticalAlignment="Stretch" Background="{x:Null}" />
                             <!--水印-->
                             <TextBlock x:Name="Message"  Padding="{TemplateBinding Padding}" Visibility="Collapsed"
-                                       Text="{TemplateBinding local:ControlAttachProperty.Watermark}" Grid.Column="1"
+                                       Text="{TemplateBinding control:ControlAttachProperty.Watermark}" Grid.Column="1"
                                        Foreground="{TemplateBinding Foreground}" IsHitTestVisible="False" Opacity="{StaticResource WatermarkOpacity}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,2,5,2" />
                             <!--附加内容区域-->
                             <Border x:Name="PART_AttachContent" Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                                <ContentControl VerticalAlignment="Center" VerticalContentAlignment="Center" Template="{TemplateBinding local:ControlAttachProperty.AttachContent}" />
+                                <ContentControl VerticalAlignment="Center" VerticalContentAlignment="Center" Template="{TemplateBinding control:ControlAttachProperty.AttachContent}" />
                             </Border>
                         </Grid>
                     </Grid>
@@ -63,10 +64,10 @@
                         </DataTrigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="{Binding Path=(local:ControlAttachProperty.MouseOverBorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="BorderBrush" Value="{Binding Path=(control:ControlAttachProperty.MouseOverBorderBrush),RelativeSource={RelativeSource Self}}"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter  Property="BorderBrush" Value="{Binding Path=(local:ControlAttachProperty.FocusBorderBrush),RelativeSource={RelativeSource Self}}"/>
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(control:ControlAttachProperty.FocusBorderBrush),RelativeSource={RelativeSource Self}}"/>
                         </Trigger>
                         <!--不可用-->
                         <Trigger Property="IsEnabled" Value="False">
@@ -86,11 +87,11 @@
     </Style>
     <!--TextBox包含清除Text按钮的样式-->
     <Style TargetType="{x:Type TextBox}" x:Key="ClearButtonTextBox" BasedOn="{StaticResource DefaultTextBox}">
-        <Setter Property="local:ControlAttachProperty.AttachContent">
+        <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
                     <local:FButton FIcon="&#xe62e;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
-                                   local:ControlAttachProperty.IsClearTextButtonBehaviorEnabled="True" Command="local:ControlAttachProperty.ClearTextCommand" 
+                                   control:ControlAttachProperty.IsClearTextButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.ClearTextCommand" 
                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="1,3,1,4" FIconSize="13" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
                 </ControlTemplate>
@@ -99,7 +100,7 @@
     </Style>
     <!--TextBox包含附加属性Label的样式-->
     <Style TargetType="{x:Type TextBox}" x:Key="LabelTextBox" BasedOn="{StaticResource DefaultTextBox}">
-        <Setter Property="local:ControlAttachProperty.LabelTemplate" >
+        <Setter Property="control:ControlAttachProperty.LabelTemplate" >
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
                     <Border Width="60" Background="{StaticResource TextLabelBackground}">
@@ -111,7 +112,7 @@
     </Style>
     <!--TextBox包含附加属性Label，以及ClearText按钮的样式-->
     <Style TargetType="{x:Type TextBox}" x:Key="LabelClearButtonTextBox" BasedOn="{StaticResource DefaultTextBox}">
-        <Setter Property="local:ControlAttachProperty.LabelTemplate" >
+        <Setter Property="control:ControlAttachProperty.LabelTemplate" >
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
                     <Border Width="60" Background="{StaticResource TextLabelBackground}">
@@ -120,11 +121,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="local:ControlAttachProperty.AttachContent">
+        <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
                     <local:FButton FIcon="&#xe62e;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
-                               local:ControlAttachProperty.IsClearTextButtonBehaviorEnabled="True" Command="local:ControlAttachProperty.ClearTextCommand" 
+                               control:ControlAttachProperty.IsClearTextButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.ClearTextCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,3,1,4" FIconSize="13" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
                 </ControlTemplate>
@@ -133,13 +134,13 @@
     </Style>
     <!--LabelOpenFileTextBox-->
     <Style TargetType="{x:Type TextBox}" x:Key="LabelOpenFileJava" BasedOn="{StaticResource LabelClearButtonTextBox}">
-        <Setter Property="local:ControlAttachProperty.Label" Value="JAVA路径"/>
-        <Setter Property="local:ControlAttachProperty.Watermark" Value="选择JAVA所在路径"/>
-        <Setter Property="local:ControlAttachProperty.AttachContent">
+        <Setter Property="control:ControlAttachProperty.Label" Value="JAVA路径"/>
+        <Setter Property="control:ControlAttachProperty.Watermark" Value="选择JAVA所在路径"/>
+        <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
                     <local:FButton FIcon="&#xe6ff;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
-                               local:ControlAttachProperty.IsOpenFileButtonBehaviorEnabled="True" Command="local:ControlAttachProperty.OpenFileCommand" 
+                               control:ControlAttachProperty.IsOpenFileButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.OpenFileCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="22" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
                 </ControlTemplate>
@@ -149,13 +150,13 @@
 
     <!--LabelOpenFolderTextBox-->
     <Style TargetType="{x:Type TextBox}" x:Key="LabelOpenFolderGame" BasedOn="{StaticResource LabelClearButtonTextBox}">
-        <Setter Property="local:ControlAttachProperty.Label" Value="游戏路径"/>
-        <Setter Property="local:ControlAttachProperty.Watermark" Value="选择游戏文件夹路径"/>
-        <Setter Property="local:ControlAttachProperty.AttachContent">
+        <Setter Property="control:ControlAttachProperty.Label" Value="游戏路径"/>
+        <Setter Property="control:ControlAttachProperty.Watermark" Value="选择游戏文件夹路径"/>
+        <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
                     <local:FButton FIcon="&#xe66b;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
-                               local:ControlAttachProperty.IsOpenFolderButtonBehaviorEnabled="True" Command="local:ControlAttachProperty.OpenFolderCommand" 
+                               control:ControlAttachProperty.IsOpenFolderButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.OpenFolderCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="22" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
                 </ControlTemplate>
@@ -165,13 +166,13 @@
 
     <!--LabelSaveFileTextBox-->
     <Style TargetType="{x:Type TextBox}" x:Key="LabelSaveFileTextBox" BasedOn="{StaticResource LabelClearButtonTextBox}">
-        <Setter Property="local:ControlAttachProperty.Label" Value="保存路径"/>
-        <Setter Property="local:ControlAttachProperty.Watermark" Value="选择文件保存路径"/>
-        <Setter Property="local:ControlAttachProperty.AttachContent">
+        <Setter Property="control:ControlAttachProperty.Label" Value="保存路径"/>
+        <Setter Property="control:ControlAttachProperty.Watermark" Value="选择文件保存路径"/>
+        <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
                     <local:FButton FIcon="&#xe666;" Style="{StaticResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
-                               local:ControlAttachProperty.IsSaveFileButtonBehaviorEnabled="True" Command="local:ControlAttachProperty.SaveFileCommand" 
+                               control:ControlAttachProperty.IsSaveFileButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.SaveFileCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="20" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
                 </ControlTemplate>

@@ -16,16 +16,13 @@ namespace BanlieueCraft_Lanucher.Page
         public Game()
         {
             InitializeComponent();
+            var uvm = new UserViewModel();
+            DataContext = uvm;
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(new Uri("/Page/ServerPage.xaml", UriKind.Relative));
-        }
 
-        private void Grid_Loaded_1(object sender, RoutedEventArgs e)
-        {
-            Frame1.Navigate(new Uri("/Page/OfflinePage.xaml", UriKind.Relative));
         }
     }
 }
