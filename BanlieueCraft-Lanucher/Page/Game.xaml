@@ -4,16 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" Loaded="Page_Loaded"
       d:DesignHeight="478" d:DesignWidth="681"
       Title="Page" >
 
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="39,10,486,193" Width="154" Height="235">
+        <Frame Name="Frame" NavigationUIVisibility="Hidden"/>
+        <StackPanel Name="Stackpanel" Orientation="Vertical" Margin="39,10,486,193" Width="154" Height="235">
             <Button Name="Image" Width="154" Height="198"  Style="{StaticResource Image}"/>
             <Button Name="Button" Click="Button_Click" Template="{StaticResource Start}" Width="154" Height="38"  Content="启动游戏" Background="#FF26CBC1" FontFamily="Microsoft YaHei" FontSize="16" FontWeight="ExtraBlack"></Button>
         </StackPanel>
 
-        <Frame Name="Frame" NavigationUIVisibility="Hidden"></Frame>
+
     </Grid>
 </Page>

@@ -36,6 +36,7 @@ namespace BanlieueCraft_Lanucher
             e.Handled = true;
             LogHelper.ErrorLog(null, e.Exception);
         }
+
     }
 
 }

@@ -5,7 +5,7 @@
         <ResourceDictionary Source="/Style/Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--FButton模板-->
-    <ControlTemplate x:Key="FButton_Template" TargetType="{x:Type local:FButton}">
+    <ControlTemplate x:Key="FButton_Template" TargetType="{x:Type local:Button}">
         <Border x:Name="border" Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path= Background}" 
                                     Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height}" 
                                     CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=CornerRadius}" 
@@ -87,7 +87,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="DefaultFButtonStyle" TargetType="{x:Type local:FButton}">
+    <Style x:Key="DefaultFButtonStyle" TargetType="{x:Type local:Button}">
         <Setter Property="Background" Value="{StaticResource ButtonBackground}" />
         <Setter Property="Foreground" Value="{StaticResource ButtonForeground}" />
         <Setter Property="MouseOverBackground" Value="{StaticResource ButtonMouseOverBackground}" />
@@ -107,10 +107,10 @@
         <Setter Property="AllowsAnimation" Value="False" />
     </Style>
     <!--默认样式-->
-    <Style TargetType="{x:Type local:FButton}" BasedOn="{StaticResource DefaultFButtonStyle}"/>
+    <Style TargetType="{x:Type local:Button}" BasedOn="{StaticResource DefaultFButtonStyle}"/>
 
     <!--背景透明的FButton样式-->
-    <Style x:Key="FButton_Transparency" TargetType="{x:Type local:FButton}">
+    <Style x:Key="FButton_Transparency" TargetType="{x:Type local:Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="MouseOverBackground" Value="Transparent" />
         <Setter Property="PressedBackground" Value="Transparent" />

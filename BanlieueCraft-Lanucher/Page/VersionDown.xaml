@@ -23,7 +23,7 @@
                                         <DataTemplate>
                                             <Grid>
                                                 <TextBlock Name="textblock" Loaded="textblock_Loaded" Margin="0,7,0,0" Text="{Binding Name}" Tag="{Binding Url}" TextAlignment="Center" Foreground="White"></TextBlock>
-                                                <local:FButton Click="FButton_Click" x:Name="fb" Margin="160,0,0,0" FIcon="&#xe639;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}" Tag="{Binding Url}"></local:FButton>
+                                                <local:Button Click="FButton_Click" x:Name="fb" Margin="160,0,0,0" FIcon="&#xe639;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}" Tag="{Binding Url}"></local:Button>
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -45,7 +45,7 @@
                                         <DataTemplate>
                                             <Grid>
                                                 <TextBlock Name="textblock" Loaded="textblock_Loaded" Margin="0,7,0,0" Text="{Binding ForgeName}" Tag="{Binding Forgeurl}" TextAlignment="Center" Foreground="White"></TextBlock>
-                                                <local:FButton Click="FButton_Click" Margin="160,0,0,0" FIcon="&#xe605;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}"></local:FButton>
+                                                <local:Button Click="FButton_Click" Margin="160,0,0,0" FIcon="&#xe605;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}"></local:Button>
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>

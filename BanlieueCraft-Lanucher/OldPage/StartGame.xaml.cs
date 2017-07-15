@@ -28,7 +28,7 @@ namespace BanlieueCraft_Lanucher.Page
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             TextBlock txt = sender as TextBlock;
             if (btn.Name == "button")
             {

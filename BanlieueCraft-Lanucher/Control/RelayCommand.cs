@@ -30,7 +30,7 @@ namespace System.Windows
         /// <param name="parameter">此命令使用的数据。如果此命令不需要传递数据，则该对象可以设置为 null。</param>
         public void Execute(object parameter)
         {
-            if (this.ExecuteCommand != null) this.ExecuteCommand((T)parameter);
+            this.ExecuteCommand?.Invoke((T)parameter);
         }
 
         /// <summary>
@@ -58,6 +58,9 @@ namespace System.Windows
     /// </summary>
     public class RelayCommand : ICommand
     {
+        private Action<object, RoutedEventArgs> showVers;
+        private Action<object> action;
+
         public Action ExecuteCommand { get; private set; }
         public Func<bool> CanExecuteCommand { get; private set; }
 
@@ -70,13 +73,23 @@ namespace System.Windows
         public RelayCommand(Action executeCommand)
             : this(executeCommand, null) { }
 
+        public RelayCommand(Action<object, RoutedEventArgs> showVers)
+        {
+            this.showVers = showVers;
+        }
+
+        public RelayCommand(Action<object> action)
+        {
+            this.action = action;
+        }
+
         /// <summary>
         /// 定义在调用此命令时调用的方法。
         /// </summary>
         /// <param name="parameter">此命令使用的数据。如果此命令不需要传递数据，则该对象可以设置为 null。</param>
         public void Execute(object parameter)
         {
-            if (this.ExecuteCommand != null) this.ExecuteCommand();
+            this.ExecuteCommand?.Invoke();
         }
 
         /// <summary>

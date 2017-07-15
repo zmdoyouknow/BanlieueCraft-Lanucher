@@ -1,51 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using BanlieueCraft_Lanucher.Control;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Navigation;
 
-namespace BanlieueCraft_Lanucher
+
+namespace BanlieueCraft_Lanucher.Control
 {
     public class UserViewModel: BaseNotifyPropertyChanged
     {
-        public RelayCommand Way { get; private set; }
-        public RelayCommand Java { get; private set; }
-        public RelayCommand Memory { get; private set; }
-        public RelayCommand Size { get; private set; }
-        public RelayCommand Vers { get; private set; }
+        public static RelayCommand Way { get; private set; }
+        public static RelayCommand Java { get; private set; }
+        public static RelayCommand Memory { get; private set; }
+        public static RelayCommand Size { get; private set; }
+
+        public static RelayCommand Jiedian { get; set; }
+
+        //public static readonly CommandBinding VersBinding;
         public UserViewModel()
         {
             Way = new RelayCommand(ShowWay);
             Java = new RelayCommand(ShowJava);
             Memory = new RelayCommand(ShowMemory);
             Size = new RelayCommand(ShowSize);
-            Vers = new RelayCommand(ShowVers);
+            Jiedian = new RelayCommand(ShowJD);
         }
-        public void ShowWay()
+
+        public static void ShowWay()
         {
             var gamepath = new Page.ViewPage.GameWay();
             gamepath.ShowDialog();
         }
-        public void ShowJava()
+        public static void ShowJava()
         {
             var gamejava = new Page.ViewPage.GameJava();
             gamejava.ShowDialog();
         }
-        public void ShowMemory()
+        public static void ShowMemory()
         {
             var gamememory = new Page.ViewPage.GameMemory();
             gamememory.ShowDialog();
         }
-        public void ShowSize()
+        public static void ShowSize()
         {
             var gamesize = new Page.ViewPage.GameSize();
             gamesize.ShowDialog();            
         }
-        public void ShowVers()
+
+        private void ShowJD()
         {
-            var gameversion = new Page.Game();
-            gameversion.Frame.Navigate(new Uri("/Page/GameVersion.xaml", UriKind.Relative));
-        }
+            MessageBox.Show("111");
+        }        
     }
 }

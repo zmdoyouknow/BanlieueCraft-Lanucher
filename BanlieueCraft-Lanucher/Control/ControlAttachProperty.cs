@@ -351,12 +351,13 @@ namespace BanlieueCraft_Lanucher.Control
             obj.SetValue(IsClearTextButtonBehaviorEnabledProperty, value);
         }
 
+
         /// <summary>
         /// 绑定清除Text操作的按钮事件
         /// </summary>
         private static void IsClearTextButtonBehaviorEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var button = d as FButton;
+            var button = d as Button;
             if (e.OldValue != e.NewValue && button != null)
             {
                 button.CommandBindings.Add(ClearTextCommandBinding);
@@ -385,7 +386,7 @@ namespace BanlieueCraft_Lanucher.Control
 
         private static void IsOpenFileButtonBehaviorEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var button = d as FButton;
+            var button = d as Button;
             if (e.OldValue != e.NewValue && button != null)
             {
                 button.CommandBindings.Add(OpenFileCommandBinding);
@@ -414,7 +415,7 @@ namespace BanlieueCraft_Lanucher.Control
 
         private static void IsOpenFolderButtonBehaviorEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var button = d as FButton;
+            var button = d as Button;
             if (e.OldValue != e.NewValue && button != null)
             {
                 button.CommandBindings.Add(OpenFolderCommandBinding);
@@ -443,7 +444,7 @@ namespace BanlieueCraft_Lanucher.Control
 
         private static void IsSaveFileButtonBehaviorEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var button = d as FButton;
+            var button = d as Button;
             if (e.OldValue != e.NewValue && button != null)
             {
                 button.CommandBindings.Add(SaveFileCommandBinding);
@@ -601,13 +602,32 @@ namespace BanlieueCraft_Lanucher.Control
         }
 
         #endregion
+        public static RoutedUICommand Vers { get; private set; }
+        private static readonly CommandBinding VersBinding;
 
+        private static void Sbb(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var button = d as Button;
+            if (e.OldValue != e.NewValue && button != null)
+            {
+                button.CommandBindings.Add(VersBinding);
+            }
+        }
+
+        private static void ShowVers(object sender, ExecutedRoutedEventArgs e)
+        {
+            var t = e.Parameter as FrameworkElement;
+            Console.WriteLine(t);
+        }
 
         /// <summary>
         /// 静态构造函数
         /// </summary>
         static ControlAttachProperty()
         {
+            Vers = new RoutedUICommand();
+            VersBinding = new CommandBinding(Vers);
+            VersBinding.Executed += ShowVers;
             //ClearTextCommand
             ClearTextCommand = new RoutedUICommand();
             ClearTextCommandBinding = new CommandBinding(ClearTextCommand);

@@ -23,22 +23,25 @@ namespace BanlieueCraft_Lanucher.Page
     /// </summary>
     public partial class GameVersion
     {
-        System.Windows.Media.Animation.Storyboard sb = null;
+        Storyboard _sb;
         public GameVersion()
         {
             InitializeComponent();
-            sb = (Storyboard)grid.Resources["spread"];
+            
+            _sb = (Storyboard)grid.Resources["spread"];
             //Game game = new Game();
-            Game game = new Game();
-            sb.Completed += (s, e) =>
+            var game = new Game();
+            _sb.Completed += (s, e) =>
             {
-                sb = (Storyboard)grid.Resources["shrink"];
-                sb.Completed += (sender, Event) => NavigationService?.Navigate(game);;
+                _sb = (Storyboard)grid.Resources["shrink"];
+                _sb.Completed += (sender, Event) => NavigationService?.Navigate(game);
             };
-            sb?.Begin();
+            _sb?.Begin();
         }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            
             var arr = new List<Verdata>();       
             var dirPath = @"I:\.minecraft\versions";
             var theFolder = new DirectoryInfo(dirPath);
@@ -49,18 +52,15 @@ namespace BanlieueCraft_Lanucher.Page
 
                 if (dname.Name.Contains("-"))
                 {
-                    string op = "OptiFine";
-                    string fog = "Forge";
-                    string lit = "LiteLoader";
-                    if (dname.Name.ToLower().IndexOf(op.ToLower(), StringComparison.Ordinal) > -1)
+                    if (dname.Name.ToLower().IndexOf("OptiFine".ToLower(), StringComparison.Ordinal) > -1)
                     {
                         var sa = Regex.Split(dname.Name, "-", RegexOptions.IgnoreCase);
                         version = sa[0] + "-OF版";
                     }
-                    else if (dname.Name.ToLower().IndexOf(fog.ToLower(), StringComparison.Ordinal) > -1)
+                    else if (dname.Name.ToLower().IndexOf("Forge".ToLower(), StringComparison.Ordinal) > -1)
                     {
                         var sa = Regex.Split(dname.Name, "-", RegexOptions.IgnoreCase);
-                        if (dname.Name.ToLower().IndexOf(lit.ToLower(), StringComparison.Ordinal) > -1)
+                        if (dname.Name.ToLower().IndexOf("LiteLoader".ToLower(), StringComparison.Ordinal) > -1)
                         {
                             version = sa[0] + "-LF版";
                         }
@@ -69,10 +69,10 @@ namespace BanlieueCraft_Lanucher.Page
                             version = sa[0] + "-FG版";
                         }
                     }
-                    else if (dname.Name.ToLower().IndexOf(lit.ToLower(), StringComparison.Ordinal) > -1)
+                    else if (dname.Name.ToLower().IndexOf("LiteLoader".ToLower(), StringComparison.Ordinal) > -1)
                     {
                         var sa = Regex.Split(dname.Name, "-", RegexOptions.IgnoreCase);
-                        if (dname.Name.ToLower().IndexOf(fog.ToLower(), StringComparison.Ordinal) > -1)
+                        if (dname.Name.ToLower().IndexOf("Forge".ToLower(), StringComparison.Ordinal) > -1)
                         {
                             version = sa[0] + "-LF版";
                         }
@@ -94,34 +94,29 @@ namespace BanlieueCraft_Lanucher.Page
                 arr.Add(new Verdata() { Version = version ,Ver = dname.Name});               
             }
             Listview.ItemsSource = arr;
-
+            
         }
         private void button_Click(object sender, RoutedEventArgs e)
-        {            
-            Button bt = sender as Button;
-            Game page = new Game();
+        {
+            System.Windows.Controls.Button bt = sender as System.Windows.Controls.Button;
+            //Game page = new Game();
             string file = Environment.CurrentDirectory;//读取路径
             string filepatch = file + @"\" + "config.ini"; //配置文件
             IniFile ini = new IniFile(filepatch);
             try
             {
                 if (bt != null)
-                {
-                    
-                    page.Verlist = bt.Content.ToString();
-                    page.Verlist = bt.Tag.ToString();
+                {                   
                     ini.IniWriteValue("Default", "SelectVer", bt.Content.ToString());
                     ini.IniWriteValue("Default", "SelectRealVer", bt.Tag.ToString());
                 }
                 //NavigationService?.Navigate(page);
-                sb?.Begin();
+                _sb?.Begin();
             }
             catch
             {
-                page.Verlist = ini.IniReadValue("Default", "SelectVer");
-                page.Realver = ini.IniReadValue("Default", "SelectRealVer");
                 //NavigationService?.Navigate(page);
-                sb?.Begin();
+                _sb?.Begin();
             }           
         }
 
@@ -133,7 +128,7 @@ namespace BanlieueCraft_Lanucher.Page
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            sb?.Begin();
+            _sb?.Begin();
         }
     }
 }

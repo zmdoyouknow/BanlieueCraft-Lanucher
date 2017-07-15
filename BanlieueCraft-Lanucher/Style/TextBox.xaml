@@ -90,7 +90,7 @@
         <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:FButton FIcon="&#xe62e;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
+                    <local:Button FIcon="&#xe62e;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
                                    control:ControlAttachProperty.IsClearTextButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.ClearTextCommand" 
                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="1,3,1,4" FIconSize="13" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
@@ -124,7 +124,7 @@
         <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:FButton FIcon="&#xe62e;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
+                    <local:Button FIcon="&#xe62e;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
                                control:ControlAttachProperty.IsClearTextButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.ClearTextCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,3,1,4" FIconSize="13" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
@@ -139,7 +139,7 @@
         <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:FButton FIcon="&#xe6ff;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
+                    <local:Button FIcon="&#xe6ff;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
                                control:ControlAttachProperty.IsOpenFileButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.OpenFileCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="22" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
@@ -155,7 +155,7 @@
         <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:FButton FIcon="&#xe66b;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
+                    <local:Button FIcon="&#xe66b;" Style="{DynamicResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
                                control:ControlAttachProperty.IsOpenFolderButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.OpenFolderCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="22" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
@@ -171,7 +171,7 @@
         <Setter Property="control:ControlAttachProperty.AttachContent">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:FButton FIcon="&#xe666;" Style="{StaticResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
+                    <local:Button FIcon="&#xe666;" Style="{StaticResource FButton_Transparency}" IsTabStop="False" FIconMargin="0"
                                control:ControlAttachProperty.IsSaveFileButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.SaveFileCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="20" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>

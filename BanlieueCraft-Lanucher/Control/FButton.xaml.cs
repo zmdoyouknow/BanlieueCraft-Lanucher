@@ -19,10 +19,10 @@ namespace BanlieueCraft_Lanucher
     /// FButton.xaml 的交互逻辑
     /// </summary>
 
-    public partial class FButton : Button
+    public partial class Button : System.Windows.Controls.Button
     {
         public static readonly DependencyProperty PressedBackgroundProperty =
-            DependencyProperty.Register("PressedBackground", typeof(Brush), typeof(FButton), new PropertyMetadata(Brushes.DarkBlue));
+            DependencyProperty.Register("PressedBackground", typeof(Brush), typeof(Button), new PropertyMetadata(Brushes.DarkBlue));
         /// <summary>
         /// 鼠标按下背景样式
         /// </summary>
@@ -33,7 +33,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty PressedForegroundProperty =
-            DependencyProperty.Register("PressedForeground", typeof(Brush), typeof(FButton), new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register("PressedForeground", typeof(Brush), typeof(Button), new PropertyMetadata(Brushes.White));
         /// <summary>
         /// 鼠标按下前景样式（图标、文字）
         /// </summary>
@@ -44,7 +44,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty MouseOverBackgroundProperty =
-            DependencyProperty.Register("MouseOverBackground", typeof(Brush), typeof(FButton), new PropertyMetadata(Brushes.RoyalBlue));
+            DependencyProperty.Register("MouseOverBackground", typeof(Brush), typeof(Button), new PropertyMetadata(Brushes.RoyalBlue));
         /// <summary>
         /// 鼠标进入背景样式
         /// </summary>
@@ -55,7 +55,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty MouseOverForegroundProperty =
-            DependencyProperty.Register("MouseOverForeground", typeof(Brush), typeof(FButton), new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register("MouseOverForeground", typeof(Brush), typeof(Button), new PropertyMetadata(Brushes.White));
         /// <summary>
         /// 鼠标进入前景样式
         /// </summary>
@@ -66,7 +66,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty FIconProperty =
-            DependencyProperty.Register("FIcon", typeof(string), typeof(FButton), new PropertyMetadata("\ue604"));
+            DependencyProperty.Register("FIcon", typeof(string), typeof(Button), new PropertyMetadata("\ue604"));
         /// <summary>
         /// 按钮字体图标编码
         /// </summary>
@@ -77,7 +77,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty FIconSizeProperty =
-            DependencyProperty.Register("FIconSize", typeof(int), typeof(FButton), new PropertyMetadata(20));
+            DependencyProperty.Register("FIconSize", typeof(int), typeof(Button), new PropertyMetadata(20));
         /// <summary>
         /// 按钮字体图标大小
         /// </summary>
@@ -88,7 +88,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty FIconMarginProperty = DependencyProperty.Register(
-            "FIconMargin", typeof(Thickness), typeof(FButton), new PropertyMetadata(new Thickness(0, 1, 3, 1)));
+            "FIconMargin", typeof(Thickness), typeof(Button), new PropertyMetadata(new Thickness(0, 1, 3, 1)));
         /// <summary>
         /// 字体图标间距
         /// </summary>
@@ -99,7 +99,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty AllowsAnimationProperty = DependencyProperty.Register(
-            "AllowsAnimation", typeof(bool), typeof(FButton), new PropertyMetadata(true));
+            "AllowsAnimation", typeof(bool), typeof(Button), new PropertyMetadata(true));
         /// <summary>
         /// 是否启用Ficon动画
         /// </summary>
@@ -110,7 +110,7 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(FButton), new PropertyMetadata(new CornerRadius(2)));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Button), new PropertyMetadata(new CornerRadius(2)));
         /// <summary>
         /// 按钮圆角大小,左上，右上，右下，左下
         /// </summary>
@@ -121,16 +121,16 @@ namespace BanlieueCraft_Lanucher
         }
 
         public static readonly DependencyProperty ContentDecorationsProperty = DependencyProperty.Register(
-            "ContentDecorations", typeof(TextDecorationCollection), typeof(FButton), new PropertyMetadata(null));
+            "ContentDecorations", typeof(TextDecorationCollection), typeof(Button), new PropertyMetadata(null));
         public TextDecorationCollection ContentDecorations
         {
             get { return (TextDecorationCollection)GetValue(ContentDecorationsProperty); }
             set { SetValue(ContentDecorationsProperty, value); }
         }
 
-        static FButton()
+        static Button()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FButton), new FrameworkPropertyMetadata(typeof(FButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Button), new FrameworkPropertyMetadata(typeof(Button)));
         }
     }
 }
