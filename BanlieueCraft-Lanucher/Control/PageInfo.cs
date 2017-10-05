@@ -26,8 +26,8 @@ namespace BanlieueCraft_Lanucher
         {
             this.dataSource = dataSource;
             this.pageSize = pageSize;
-            this.pagecount = dataSource.Count / pageSize;
-            this.pagecount += (dataSource.Count % pageSize) != 0 ? 1 : 0;
+            pagecount = dataSource.Count / pageSize;
+            pagecount += (dataSource.Count % pageSize) != 0 ? 1 : 0;
         }
 
         public List<T> GetPageData(JumpOperation jo)

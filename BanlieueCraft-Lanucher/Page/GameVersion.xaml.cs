@@ -43,7 +43,7 @@ namespace BanlieueCraft_Lanucher.Page
         {
             
             var arr = new List<Verdata>();       
-            var dirPath = @"I:\.minecraft\versions";
+            var dirPath = Environment.CurrentDirectory + @"\.minecraft\versions";
             var theFolder = new DirectoryInfo(dirPath);
             var dfolder = theFolder.GetDirectories();
             foreach (var dname in dfolder)

@@ -16,6 +16,9 @@ using MySql.Data;
 using System.Configuration;
 using MySql.Data.MySqlClient;
 using LitJson;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace BanlieueCraft_Lanucher.Page
 {
@@ -46,8 +49,12 @@ namespace BanlieueCraft_Lanucher.Page
         }
 
         private readonly List<Listdata> _list = new List<Listdata>();
+        private readonly List<Listdata> _list1 = new List<Listdata>();
+        private readonly List<Listdata> _list2 = new List<Listdata>();
         List<Forgelistdata> _forgelist = new List<Forgelistdata>();
-        private IEnumerable<Listdata> _query = null;
+        private IEnumerable<Listdata> _query;
+        private IEnumerable<Listdata> _query1;
+        private IEnumerable<Listdata> _query2;
         private string _strjson;
         public class Listdata
         {
@@ -64,17 +71,12 @@ namespace BanlieueCraft_Lanucher.Page
             public string Forgeurl { get; set; }
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
-        {            
-
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             WaitingBox.Show(() =>
             {
-                string file = Environment.CurrentDirectory;//读取路径
-                string filepatch = file + @"\" + "config.ini"; //配置文件
-                IniFile ini = new IniFile(filepatch);
+                var file = Environment.CurrentDirectory;//读取路径
+                var filepatch = file + @"\" + "config.ini"; //配置文件
+                var ini = new IniFile(filepatch);
                 if (bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && !bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))
                 {
                     _strjson = GetJson.GetUrlContent("https://launchermeta.mojang.com/mc/game/version_manifest.json");
@@ -82,44 +84,54 @@ namespace BanlieueCraft_Lanucher.Page
                 if (!bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))
                 {
                     _strjson = GetJson.GetUrlContent("http://bmclapi2.bangbang93.com/mc/game/version_manifest.json");
-                }                
+                }
                 //string strjson = File.ReadAllText(@"F:\Chrome\version_manifest.json");
-                JsonData verdata = JsonMapper.ToObject(_strjson);
-                JsonData verjson = verdata["versions"];
+                var verdata = JsonMapper.ToObject(_strjson);
+                var verjson = verdata["versions"];
+                //var ver = verdata["versions"]["id"].ToString();
                 for (int i = 0; i < verjson.Count; i++)
                 {
                     string[] tm = verjson[i]["time"].ToString().Split('T', '+');
                     string tmi = tm[0] + "  ||  " + tm[1];
-                    string vs;
-                    if (verjson[i]["type"].ToString() == "snapshot")
+                    //var rela = new List<string>();
+                    if (!Directory.Exists($"{Environment.CurrentDirectory}/.minecraft/versions/{verjson[i]["id"]}/"))
                     {
-                        vs = "快照版";
+                        if (verjson[i]["type"].ToString() == "release")
+                        {
+                            var data = new Listdata { Version = verjson[i]["id"].ToString(), Time = tmi, Name = "正式版", Url = verjson[i]["id"] + "|" + verjson[i]["url"] };
+                            _list.Add(data);
+                        }
+                        if (verjson[i]["type"].ToString() == "snapshot")
+                        {
+                            var data = new Listdata { Version = verjson[i]["id"].ToString(), Time = tmi, Name = "快照版", Url = verjson[i]["id"] + "|" + verjson[i]["url"] };
+                            _list1.Add(data);
+                        }
+                        if (verjson[i]["type"].ToString().IndexOf("old", StringComparison.Ordinal) > -1)
+                        {
+                            var data = new Listdata { Version = verjson[i]["id"].ToString(), Time = tmi, Name = "远古版", Url = verjson[i]["id"] + "|" + verjson[i]["url"] };
+                            _list2.Add(data);
+                        }
                     }
-                    else if (verjson[i]["type"].ToString() == "release")
-                    {
-                        vs = "正式版";
-                        //text.Foreground = Brushes.Green;
-                    }
-                    else if (verjson[i]["type"].ToString().IndexOf("old", StringComparison.Ordinal) > -1)
-                    {
-                        vs = "远古版";
-                    }
-                    else
-                    {
-                        vs = verjson[i]["type"].ToString();
-                    }
-                    var data = new Listdata() { Version = verjson[i]["id"].ToString(), Time = tmi, Name = vs, Url = verjson[i]["url"].ToString() };
-                    _list.Add(data);
+
                 }
                 _query = from items in _list orderby items.Name descending select items;
+                _query1 = from items in _list1 orderby items.Name descending select items;
+                _query2 = from items in _list2 orderby items.Name descending select items;
             }, "正在获取官方版本信息，请稍后...");
 
-            listView.ItemsSource = _query;
+            ListView.ItemsSource = _query;
+            ListView001.ItemsSource = _query1;
+            ListView002.ItemsSource = _query2;
             _strjson = null;
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
         private void textblock_Loaded(object sender, RoutedEventArgs e)
         {
-            TextBlock t = sender as TextBlock;
+            var t = sender as TextBlock;
             if (t != null && t.Text == "远古版")
             {
                 t.Foreground = Brushes.Red;
@@ -134,26 +146,70 @@ namespace BanlieueCraft_Lanucher.Page
             }
         }
 
-        private void Grid_Loaded_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 查找子控件
+        /// </summary>
+        /// <typeparam name="T">子控件的类型</typeparam>
+        /// <param name="obj">要找的是obj的子控件</param>
+        /// <param name="name">想找的子控件的Name属性</param>
+        /// <returns>目标子控件</returns>
+        public static T GetChildObject<T>(DependencyObject obj, string name) where T : FrameworkElement
         {
-            string file = Environment.CurrentDirectory;//读取路径
-            string filepatch = file + @"\" + "config.ini"; //配置文件
-            IniFile ini = new IniFile(filepatch);
-            if (bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && !bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))
+            DependencyObject child = null;
+            T grandChild = null;
+
+            for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
             {
-                _strjson = GetJson.GetUrlContent("https://launchermeta.mojang.com/mc/game/version_manifest.json");
+                child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child is T && (((T)child).Name == name | string.IsNullOrEmpty(name)))
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    // 在下一级中没有找到指定名字的子控件，就再往下一级找
+                    grandChild = GetChildObject<T>(child, name);
+                    if (grandChild != null)
+                        return grandChild;
+                }
             }
-            if (!bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))
-            {
-                _strjson = "http://bmclapi2.bangbang93.com/forge/minecraft/" + ini.IniReadValue("Default", "SelectRealVer");
-            }
-            
-            
+
+            return null;
+
         }
 
+        private void Grid_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            //string file = Environment.CurrentDirectory;//读取路径
+            //string filepatch = file + @"\" + "config.ini"; //配置文件
+            //IniFile ini = new IniFile(filepatch);
+            //if (bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && !bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))
+            //{
+            //    _strjson = GetJson.GetUrlContent("https://launchermeta.mojang.com/mc/game/version_manifest.json");
+            //}
+            //if (!bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))
+            //{
+            //    _strjson = "http://bmclapi2.bangbang93.com/forge/minecraft/" + ini.IniReadValue("Default", "SelectRealVer");
+            //}
+            
+            
+        }
         private void FButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxX.Warning("WAAAAAAAAAAAAA");
+            //var file = @"I:\";
+            var bt = sender as Button;
+            if (bt == null) return;
+            var url = bt.Tag.ToString().Split('|');
+            //Console.WriteLine(bt.Tag.ToString());
+            var downroad = new DownRoad
+            {
+                Url = url[1],
+                Ver = url[0],
+                Label1 = {Content = "正在下载json文件..."}
+            };
+            downroad.ShowDialog();
         }
+
     }
 }

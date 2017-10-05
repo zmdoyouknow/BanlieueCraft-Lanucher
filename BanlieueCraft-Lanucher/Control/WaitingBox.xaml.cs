@@ -18,27 +18,27 @@ namespace System.Windows
     /// </summary>
     public partial class WaitingBox : Window
     {
-        public string Text { get { return this.txtMessage.Text; } set { this.txtMessage.Text = value; } }
+        public string Text { get { return txtMessage.Text; } set { txtMessage.Text = value; } }
 
         private Action _Callback;
 
         public WaitingBox(Action callback)
         {
             InitializeComponent();
-            this._Callback = callback;
-            this.Loaded += WaitingBox_Loaded;
+            _Callback = callback;
+            Loaded += WaitingBox_Loaded;
         }
 
         void WaitingBox_Loaded(object sender, RoutedEventArgs e)
         {
-            this._Callback.BeginInvoke(this.OnComplate, null);
+            _Callback.BeginInvoke(OnComplate, null);
         }
 
         private void OnComplate(IAsyncResult ar)
         {
-            this.Dispatcher.Invoke(new Action(() =>
+            Dispatcher.Invoke(new Action(() =>
             {
-                this.Close();
+                Close();
             }));
         }
 

@@ -34,7 +34,7 @@ namespace System.Windows
         public MessageBoxX(EnumNotifyType type, string mes)
         {
             InitializeComponent();
-            this.txtMessage.Text = mes;
+            txtMessage.Text = mes;
             
             //type
             btnCancel.Visibility = Visibility.Collapsed;
@@ -51,22 +51,22 @@ namespace System.Windows
                     break;
                 case EnumNotifyType.Question:
                     tishi.Text = "?";
-                    this.btnCancel.Visibility = Visibility.Visible;
+                    btnCancel.Visibility = Visibility.Visible;
                     break;
             }
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            this.Result = true;
-            this.Close();
+            Result = true;
+            Close();
             e.Handled = true;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Result = false;
-            this.Close();
+            Result = false;
+            Close();
             e.Handled = true;
         }
 
@@ -156,7 +156,7 @@ namespace System.Windows
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
-            this.DragMove();
+            DragMove();
         }
     }
 }

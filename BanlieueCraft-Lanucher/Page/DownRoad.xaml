@@ -1,52 +1,33 @@
-﻿<Window x:Class="BanlieueCraft_Lanucher.DownRoad"
+﻿<Window x:Class="BanlieueCraft_Lanucher.Page.DownRoad"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+        xmlns:control="clr-namespace:BanlieueCraft_Lanucher.Control"
         mc:Ignorable="d" Loaded="Window_Loaded"
         Title="DownRoad" Height="400" Width="450" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Storyboard x:Key="WaterStoryboard">
-            <PointAnimation Storyboard.TargetName="bs_Water" Storyboard.TargetProperty="Point1" From="130,30" To="130,0" Duration="00:00:2" AutoReverse="True" RepeatBehavior="Forever"></PointAnimation>
-            <PointAnimation Storyboard.TargetName="bs_Water" Storyboard.TargetProperty="Point2" From="150,-70" To="150,-40" Duration="00:00:1.8" AutoReverse="True" RepeatBehavior="Forever"></PointAnimation>
-        </Storyboard>
-    </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard Storyboard="{StaticResource WaterStoryboard}"></BeginStoryboard>
-        </EventTrigger>
-    </Window.Triggers>
-    <Grid Width="450" Background="#FF20243C" >
-        <TextBlock Grid.Row="0" x:Name="text" HorizontalAlignment="Left" Height="24" Margin="22,5,0,0" TextWrapping="Wrap" Text="版本下载中..." VerticalAlignment="Top" Width="148" Foreground="White" TextAlignment="Left" FontFamily="Microsoft YaHei" FontSize="14" RenderTransformOrigin="0.446,1.609"/>
-        <Line Grid.Row="0" X1="0" Y1="30" X2="510" Y2="30" Stroke="#00abdc" StrokeThickness="2"></Line>
-        <Ellipse Width="180" Height="180" Margin="138,86,132,134" Fill="#FF181A1D" />
-        <Grid  Margin="88,14,82,134" Background="#FF262B4B">
-            <Grid.Clip>
-                <EllipseGeometry Center="140,162.2" RadiusX="80" RadiusY="80"/>
-            </Grid.Clip>
-            <StackPanel VerticalAlignment="Bottom">
-                <Path Fill="#FF0FBE09" Margin="0,0,0,-1">
-                    <Path.Data>
-                        <PathGeometry>
-                            <PathFigure StartPoint="60,-30">
-                                <BezierSegment x:Name="bs_Water" Point1="130,30" Point2="150,-70" Point3="270,4"></BezierSegment>
-                                <PolyLineSegment Points="60,5 60,5"></PolyLineSegment>
-                            </PathFigure>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
-                <Rectangle Name="rec_Water" Fill="#FF17BE09" Height="10"></Rectangle>
-            </StackPanel>
-            <!--内部气泡容器-->
-            <Canvas Name="cvs_Outer" Margin="97,143,21,-45"></Canvas>
-            <!--进度-->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White" TextBlock.FontSize="18" Height="43" Margin="120,143,65,66" Width="95">
-                <TextBlock Name="text_Value" Text="80"></TextBlock>
-                <TextBlock Text="%"></TextBlock>
-            </StackPanel>
-        </Grid>
-        <!--外部气泡容器-->
-        <Button  Click="button1_Click" x:Name="button" Content="取消下载" Template="{StaticResource SaveSetting}" HorizontalAlignment="Center" Height="47" Margin="161,343,161,0" VerticalAlignment="Top" Width="128"/>
+    <Grid Width="450" Background="#FF20243C" x:Name="LayoutRoot" >
+        <local:ProBar Width="450" Height="20" Margin="0,243,0,137" HorizontalAlignment="Center"  VerticalAlignment="Center"></local:ProBar>
+        <Label x:Name="Label" Content="正在下载..." HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="134" Foreground="White" FontWeight="Bold" FontSize="14"/>
+        <Label x:Name="Label1" Content="json下载完成" HorizontalAlignment="Left" Height="26" Margin="54,217,0,0" VerticalAlignment="Top" Width="342" HorizontalContentAlignment="Left">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAE5035"/>
+                    <GradientStop Color="#FFC36E55" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Button Click="Button_Click" x:Name="Button" IsEnabled="False" Content="确定" HorizontalAlignment="Left" Template="{StaticResource SaveSetting}" Height="33" Margin="163,327,163,0" VerticalAlignment="Top" Width="118" Foreground="White" RenderTransformOrigin="0.067,0.46"/>
+        <ProgressBar Style="{StaticResource SimpleProgressBar}" x:Name="Pro2" Value="10" Margin="54,198,54,188" Height="10"/>
+        <Label x:Name="Label4Copy" Content="正在更新资源：" HorizontalAlignment="Left" Height="25" Margin="50,170,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAE5035"/>
+                    <GradientStop Color="#FFC36E55" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Image x:Name="Image" HorizontalAlignment="Left" Height="59" Margin="188,64,0,0" VerticalAlignment="Top" Width="57" Source="/BanlieueCraft-Lanucher;component/Resources/logo.png" Stretch="Fill"/>
     </Grid>
 </Window>

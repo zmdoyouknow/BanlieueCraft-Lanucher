@@ -3,11 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+        xmlns:local="clr-namespace:BanlieueCraft_Lanucher.Control"
         mc:Ignorable="d"
         Title="Login" Height="300" Width="320" WindowStyle="None" Background="#FF1A1D33" AllowsTransparency="True" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock Grid.Row="0" x:Name="text" HorizontalAlignment="Left" Height="24" Margin="22,5,0,0" TextWrapping="Wrap" Text="登陆" VerticalAlignment="Top" Width="148" Foreground="White" TextAlignment="Left" FontFamily="Microsoft YaHei" FontSize="14" RenderTransformOrigin="0.446,1.609"/>
+        <TextBlock Grid.Row="0" x:Name="Text" HorizontalAlignment="Left" Height="24" Margin="22,5,0,0" TextWrapping="Wrap" Text="登陆账号" VerticalAlignment="Top" Width="148" Foreground="White" TextAlignment="Left" FontFamily="Microsoft YaHei" FontSize="14" RenderTransformOrigin="0.446,1.609" FontWeight="Bold"/>
         <Line Grid.Row="0" X1="0" Y1="30" X2="320" Y2="30" Stroke="#00abdc" StrokeThickness="1"></Line>
+        <TextBox Margin="32,66,32,205" Style="{ StaticResource LabelClearButtonTextBox}" Width="Auto" local:ControlAttachProperty.Watermark="请输入游戏账号..." local:ControlAttachProperty.Label="账号：" ></TextBox>
+        <PasswordBox Margin="32,120,32,151" Style="{ StaticResource LabelClearButtonPasswordBox}" Width="Auto" local:ControlAttachProperty.Label="密码：" local:ControlAttachProperty.Watermark="请输入游戏密码..."></PasswordBox>
+        <Button x:Name="LoginButton" Click="LoginButton_Click" Template="{StaticResource SaveSetting}" Content="登陆" HorizontalAlignment="Left" Height="33" Margin="51,224,0,0" VerticalAlignment="Top" Width="69" FontWeight="Bold" IsDefault="True"/>
+        <Button x:Name="RegButton" Click="RegButton_Click" Template="{StaticResource SaveSetting}" Content="注册" HorizontalAlignment="Left" Height="33" Margin="170,224,0,0" VerticalAlignment="Top" Width="81" FontWeight="Bold"/>
+
     </Grid>
 </Window>

@@ -17,8 +17,8 @@ namespace System.Windows
 
         public RelayCommand(Action<T> executeCommand, Predicate<T> canExecuteCommand)
         {
-            this.ExecuteCommand = executeCommand;
-            this.CanExecuteCommand = canExecuteCommand;
+            ExecuteCommand = executeCommand;
+            CanExecuteCommand = canExecuteCommand;
         }
 
         public RelayCommand(Action<T> executeCommand)
@@ -30,7 +30,7 @@ namespace System.Windows
         /// <param name="parameter">此命令使用的数据。如果此命令不需要传递数据，则该对象可以设置为 null。</param>
         public void Execute(object parameter)
         {
-            this.ExecuteCommand?.Invoke((T)parameter);
+            ExecuteCommand?.Invoke((T)parameter);
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace System.Windows
 
         public event EventHandler CanExecuteChanged
         {
-            add { if (this.CanExecuteCommand != null) CommandManager.RequerySuggested += value; }
-            remove { if (this.CanExecuteCommand != null) CommandManager.RequerySuggested -= value; }
+            add { if (CanExecuteCommand != null) CommandManager.RequerySuggested += value; }
+            remove { if (CanExecuteCommand != null) CommandManager.RequerySuggested -= value; }
         }
     }
 
@@ -66,8 +66,8 @@ namespace System.Windows
 
         public RelayCommand(Action executeCommand, Func<bool> canExecuteCommand)
         {
-            this.ExecuteCommand = executeCommand;
-            this.CanExecuteCommand = canExecuteCommand;
+            ExecuteCommand = executeCommand;
+            CanExecuteCommand = canExecuteCommand;
         }
 
         public RelayCommand(Action executeCommand)
@@ -89,7 +89,7 @@ namespace System.Windows
         /// <param name="parameter">此命令使用的数据。如果此命令不需要传递数据，则该对象可以设置为 null。</param>
         public void Execute(object parameter)
         {
-            this.ExecuteCommand?.Invoke();
+            ExecuteCommand?.Invoke();
         }
 
         /// <summary>
@@ -106,8 +106,8 @@ namespace System.Windows
 
         public event EventHandler CanExecuteChanged
         {
-            add { if (this.CanExecuteCommand != null) CommandManager.RequerySuggested += value; }
-            remove { if (this.CanExecuteCommand != null) CommandManager.RequerySuggested -= value; }
+            add { if (CanExecuteCommand != null) CommandManager.RequerySuggested += value; }
+            remove { if (CanExecuteCommand != null) CommandManager.RequerySuggested -= value; }
         }
     }
 }

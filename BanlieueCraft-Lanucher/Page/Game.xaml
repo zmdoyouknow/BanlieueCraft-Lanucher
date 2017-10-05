@@ -11,7 +11,7 @@
     <Grid>
         <Frame Name="Frame" NavigationUIVisibility="Hidden"/>
         <StackPanel Name="Stackpanel" Orientation="Vertical" Margin="39,10,486,193" Width="154" Height="235">
-            <Button Name="Image" Width="154" Height="198"  Style="{StaticResource Image}"/>
+            <Button Name="Image" Width="154" Height="198"  Style="{StaticResource Image}" Tag="BanlieueCraft服务器"/>
             <Button Name="Button" Click="Button_Click" Template="{StaticResource Start}" Width="154" Height="38"  Content="启动游戏" Background="#FF26CBC1" FontFamily="Microsoft YaHei" FontSize="16" FontWeight="ExtraBlack"></Button>
         </StackPanel>
 

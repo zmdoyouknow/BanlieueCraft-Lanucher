@@ -9,29 +9,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BanlieueCraft_Lanucher
 {
     /// <summary>
-    /// Login.xaml 的交互逻辑
+    /// ProBar.xaml 的交互逻辑
     /// </summary>
-    public partial class Login : Window
+    public partial class ProBar : UserControl
     {
-        public Login()
+        public ProBar()
         {
             InitializeComponent();
-        }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RegButton_Click(object sender, RoutedEventArgs e)
-        {
-            var agree = new Agree();
-            agree.ShowDialog();
         }
     }
 }

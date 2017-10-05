@@ -8,7 +8,7 @@
         <!--Background="{Binding Path=Background,ElementName=wb}"-->
         <Border Background="{StaticResource WaitingBoxBackground}"  Opacity="0.89" CornerRadius="1" Effect="{StaticResource WindowDropShadow}"></Border>
         <StackPanel VerticalAlignment="Center"  Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <TextBlock Text="&#xe67e;" x:Name="FIcon" FontSize="50" Style="{StaticResource Icon}"  RenderTransformOrigin="0.5,0.5" Margin="3">
+            <TextBlock Text="&#xe67f;" x:Name="FIcon" FontSize="50" Style="{StaticResource Icon}"  RenderTransformOrigin="0.5,0.5" Margin="3">
                 <TextBlock.RenderTransform>
                     <RotateTransform x:Name="TransFIcon" Angle="0"/>
                 </TextBlock.RenderTransform>

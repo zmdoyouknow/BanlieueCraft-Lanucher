@@ -1,411 +1,198 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Net;
+using System.Security.Policy;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using LitJson;
+using System.Text;
+using System.Windows.Forms;
+using System.Collections;
+using System.Text.RegularExpressions;
 
-namespace BanlieueCraft_Lanucher
+namespace BanlieueCraft_Lanucher.Page
 {
     /// <summary>
     /// DownRoad.xaml 的交互逻辑
     /// </summary>
     public partial class DownRoad : Window
     {
+        public string Url;
+        public string Ver;
+        public int TotalFile;
+        public int LoadFile;
+        public int Tempint1;
+        public int Tempint2;
+        public WebClient Wc = new WebClient();
+        public ArrayList Pathlist = new ArrayList();
+
         public DownRoad()
         {
             InitializeComponent();
+            Wc.DownloadProgressChanged += wc_DownloadProgressChanged;
         }
-        #region 成员变量
-        /// <summary>
-        /// 进度
-        /// </summary>
-        //private int _proVlaue = 0;
-        /// <summary>
-        /// 线程
-        /// </summary>
-        private BackgroundWorker _worker = new BackgroundWorker();
-        /// <summary>
-        /// 随机数
-        /// </summary>
-        private Random _rd = new Random();
-        /// <summary>
-        /// 外部大气泡最大个数
-        /// </summary>
-        private int _maxOuterBigBubbleCount = 10;
-        /// <summary>
-        /// 外部大气泡信息集合
-        /// </summary>
-        private List<BubbleInfo> _outerBigBubbleInfoList = new List<BubbleInfo>();
-        /// <summary>
-        /// 外部小气泡最大个数
-        /// </summary>
-        private int _maxOuterSmallBubbleCount = 30;
-        /// <summary>
-        /// 外部小气泡信息集合
-        /// </summary>
-        private List<BubbleInfo> _outerSmallBubbleInfoList = new List<BubbleInfo>();
-        /// <summary>
-        /// 内部气泡最大个数
-        /// </summary>
-        private int _maxInnerBubbleCount = 5;
-        /// <summary>
-        /// 内部气泡信息集合
-        /// </summary>
-        private List<BubbleInfo> _innerBubbleInfoList = new List<BubbleInfo>();
-        #endregion
 
-        #region 事件
-        #region loaded
-        /// <summary>
-        /// loaded
-        /// </summary>
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            //注销事件
 
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-            //清除粒子
-            _worker.CancelAsync();
-            cvs_Outer.Children.Clear();
-            _outerBigBubbleInfoList.Clear();
-            _outerSmallBubbleInfoList.Clear();
-            _innerBubbleInfoList.Clear();
-            
-            this.Close();
-        }
-        #endregion
-        #region dowork
-        /// <summary>
-        /// dowork
-        /// </summary>
-        private ManualResetEvent manualReset = new ManualResetEvent(true);
-        void _worker_DoWork(object sender, DoWorkEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 100; i++)
+            //Console.WriteLine(Path.GetFileName(Url));
+            if (!Directory.Exists($"{Environment.CurrentDirectory}/.minecraft/versions/{Ver}/")) 
             {
-                if (_worker.CancellationPending)
+                Directory.CreateDirectory($"{Environment.CurrentDirectory}/.minecraft/versions/{Ver}/"); //版本文件夹不存在新建文件夹   
+            }
+            var file = Environment.CurrentDirectory;//读取路径
+            var filepatch = file + @"\" + "config.ini"; //配置文件
+            var ini = new IniFile(filepatch);
+            if (bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) &&
+                !bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))                              //官方
+            {
+                var task = Wc.DownloadFileTaskAsync(Url,
+                    string.Format("{0}/.minecraft/versions/{1}/{1}.json", Environment.CurrentDirectory, Ver));
+                await task;
+                Label1.Content = Path.GetFileName(Url) + "下载完成! 开始下载本体文件...";
+                var cljson =
+                    GetJson.GetUrlContent(string.Format("{0}/.minecraft/versions/{1}/{1}.json",
+                        Environment.CurrentDirectory, Ver));
+                var clientdata = JsonMapper.ToObject(cljson);
+                var clienturl = clientdata["downloads"]["client"]["url"].ToString();
+                //Console.WriteLine(clint);
+                var clienttask = Wc.DownloadFileTaskAsync(clienturl,
+                    string.Format("{0}/.minecraft/versions/{1}/{1}.jar", Environment.CurrentDirectory, Ver));
+                await clienttask;
+                Label1.Content = Ver + ".jar本体文件下载完成";
+            }
+            if (!bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Mojang")) && 
+                bool.Parse(ini.IniReadValue("Default", "OnDownRoad_Zhcn")))                                  //国内
+            {
+                //wc.Headers.Add("user-agent", ".NET Framework Test Client");
+                TotalFile++;
+                var task = Wc.DownloadFileTaskAsync($"https://bmclapi2.bangbang93.com/version/{Ver}/json",
+                    string.Format("{0}/.minecraft/versions/{1}/{1}.json", Environment.CurrentDirectory, Ver));
+                await task;
+                TotalFile++;
+                Label1.Content = Path.GetFileName(Url) + "下载完成! 开始下载本体文件...";
+                //Console.WriteLine(clint);
+                var clienttask = Wc.DownloadFileTaskAsync($"https://bmclapi2.bangbang93.com/version/{Ver}/client",
+                    string.Format("{0}/.minecraft/versions/{1}/{1}.jar", Environment.CurrentDirectory, Ver));
+                await clienttask;
+                Label1.Content = Ver + ".jar本体文件下载完成! 开始下载缺失文件...";
+                var cljson =GetJson.GetUrlContent(string.Format("{0}/.minecraft/versions/{1}/{1}.json",Environment.CurrentDirectory, Ver));
+                var clientdata = JsonMapper.ToObject(cljson);
+                //Console.WriteLine(clientdata["libraries"].Count);
+                var libdata = clientdata["libraries"];
+                for (var i = 0; i < libdata.Count; i++)
                 {
-                    for (int k = i; k >= 0; k--)
+                    //Console.WriteLine(libdata[i]["downloads"].ToString());
+                    var downloads = libdata[i]["downloads"];
+                    if (downloads.Keys.Contains("artifact"))
                     {
-                        Thread.Sleep(10);
-                        _worker.ReportProgress(k);
+                        var artifact = downloads["artifact"];
+                        var path = artifact["path"].ToString();
+                        //Console.WriteLine(path);
+                        Pathlist.Add(path);
+                        Tempint1 = artifact.Count;
                     }
-                    e.Cancel = true;
-                    return;
-                }else
-                {
-                    Thread.Sleep(500);
-                    _worker.ReportProgress(i);
+                    if (downloads.Keys.Contains("classifiers"))
+                    {
+                        var classifiers = downloads["classifiers"];
+                        Tempint2 = classifiers.Count;
+                        if (classifiers.Keys.Contains("natives-windows"))
+                        {
+                            var path = classifiers["natives-windows"]["path"].ToString();
+                            Console.WriteLine(path);
+                            Pathlist.Add(path);
+                        }
+                    }                    
+                    //var jarname = libdata[i]["name"].ToString();
+                    //var splitname = jarname.Split(':');
+                    //var pathdir = splitname[0].Replace(".", "\\") + "\\" + splitname[1] + "\\" + splitname[2];
+                    //var pathjar = splitname[0].Replace(".", "\\") + "\\" + splitname[1] + "\\" + splitname[2] + "\\" + splitname[1] + "-" + splitname[2] + ".jar";
+                    //if (!Directory.Exists(Environment.CurrentDirectory + @"\.minecraft\libraries\" + pathdir))
+                    //{
+                    //    //路径内文件夹不存在    创建
+                    //   // Directory.CreateDirectory(Environment.CurrentDirectory + @"\.minecraft\libraries\" + pathdir);
+                    //}
+                    //if (!File.Exists(Environment.CurrentDirectory + @"\.minecraft\libraries\" + pathjar))
+                    //{
+                    //    //文件不存在   下载                        
+                    //    //var jarurl = "https://bmclapi2.bangbang93.com/libraries/" + pathjar.Replace(@"\", "/");
+                    //    //var path = Environment.CurrentDirectory + @"\.minecraft\libraries\" + pathjar;
+                    //    //if (CheckUrl(jarurl))
+                    //    //{
+                    //    //    //Console.WriteLine(jarurl);
+                    //    //    var task2 = wc.DownloadFileTaskAsync(jarurl, path);
+                    //    //    await task2;
+                    //    //    TotalFile++;
+                    //    //}
+
+                    //}
                 }
-                //_proVlaue += 2;
+                TotalFile += Tempint1 + Tempint2;
+                foreach (var path in Pathlist)
+                {                    
+                    //Console.WriteLine(path);
+                    //TotalFile++;
+                    var dir = path.ToString().Substring(0,path.ToString().LastIndexOf("/", StringComparison.Ordinal));
+                    var pathurl = "https://bmclapi2.bangbang93.com/libraries/" + path;
+                    var pathdir = Environment.CurrentDirectory + @"\.minecraft\libraries\" + path;
+                    if (!Directory.Exists(Environment.CurrentDirectory + @"\.minecraft\libraries\" + dir))
+                    {
+                        //路径内文件夹不存在    创建
+                        Directory.CreateDirectory(Environment.CurrentDirectory + @"\.minecraft\libraries\" + dir);
+                    }
+                    if (!File.Exists(Environment.CurrentDirectory + @"\.minecraft\libraries\" + path))
+                    {
+                        if (CheckUrl(pathurl))
+                        {
+                            var task2 = Wc.DownloadFileTaskAsync(pathurl, pathdir);
+                            await task2;
+                        }
+                    }
+                }
+                Label1.Content = "下载完成...";
+                Button.IsEnabled = true;
             }
         }
-        #endregion
-        #region 进度变化
-        /// <summary>
-        /// 进度变化
-        /// </summary>
-        void _worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            text_Value.Text = e.ProgressPercentage.ToString();
-            rec_Water.Height = e.ProgressPercentage * 1.6;
 
-            if (e.ProgressPercentage == 100)
+        public bool CheckUrl(string url)
+        {
+            try
             {
-                //注销事件
-                CompositionTarget.Rendering -= CompositionTarget_Rendering;
-                //清除粒子
-                cvs_Outer.Children.Clear();
-                _outerBigBubbleInfoList.Clear();
-                _outerSmallBubbleInfoList.Clear();
-                _innerBubbleInfoList.Clear();
-                button.Content = "下载完成";
+                var req = (HttpWebRequest)WebRequest.Create(url);
+                req.Timeout = 100;
+                var resp = (HttpWebResponse)req.GetResponse();
+                if (resp.StatusCode == HttpStatusCode.OK)
+                {
+                    resp.Close();
+                    return true;
+                }
+            }
+            catch (WebException)
+            {
+                return false;
+            }
+
+            return false;
+
+        }
+
+        private void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {            
+            Dispatcher.Invoke(new MethodInvoker(delegate {
+                Pro2.Value = e.ProgressPercentage;
                 
-            }
+            }));
         }
-        #endregion
-        #region 帧渲染
-        /// <summary>
-        /// 帧渲染
-        /// </summary>
-        private void CompositionTarget_Rendering(object sender, EventArgs e)
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OuterBigBubbleAnimation();
-            AddOuterBigBubble();
-            OuterSmallBubbleAnimation();
-            AddOuterSmallBubble();
-            InnerBubbleAnimation();
-            AddInnerBubble();
+            Close();
+            var vd = new MainWindow();
+            vd.PageContext.Refresh();
         }
-        #endregion
-        #endregion
-
-        #region 方法
-        #region 获取气泡
-        /// <summary>
-        /// 获取气泡
-        /// </summary>
-        /// <param name="diameter">直径</param>
-        /// <returns>Viewbox</returns>
-        private Viewbox GetBubble(double diameter)
-        {
-            #region 气泡轮廓
-            Ellipse ellOuter = new Ellipse();
-            ellOuter.Width = 200;
-            ellOuter.Height = 200;
-            RadialGradientBrush rgBrush = new RadialGradientBrush();
-            rgBrush.GradientStops.Add(new GradientStop() { Offset = 0, Color = Color.FromArgb(255, 20, 240, 10) });
-            rgBrush.GradientStops.Add(new GradientStop() { Offset = 0.85, Color = Color.FromArgb(255, 20, 150, 10) });
-            rgBrush.GradientStops.Add(new GradientStop() { Offset = 1, Color = Color.FromArgb(255, 20, 100, 10) });
-            ellOuter.Fill = rgBrush;
-            #endregion
-
-            #region 月牙形状的反光
-            //下半弧
-            PathFigure pf0 = new PathFigure() { StartPoint = new Point(100, 185) };
-            pf0.Segments.Add(new ArcSegment() { Point = new Point(185, 100), Size = new Size(100, 100) });
-            PathGeometry pg0 = new PathGeometry();
-            pg0.Figures.Add(pf0);
-            //上半弧
-            PathFigure pf1 = new PathFigure() { StartPoint = new Point(100, 185) };
-            pf1.Segments.Add(new ArcSegment() { Point = new Point(185, 100), Size = new Size(200, 200) });
-            PathGeometry pg1 = new PathGeometry();
-            pg1.Figures.Add(pf1);
-
-            GeometryGroup gg = new GeometryGroup();
-            gg.Children.Add(pg0);
-            gg.Children.Add(pg1);
-
-            Path pathMoon = new Path();
-            pathMoon.Data = gg;
-            pathMoon.Fill = new SolidColorBrush(Color.FromArgb((byte)(255 * 0.7), 255, 255, 255));
-            pathMoon.Effect = new BlurEffect() { Radius = 10 };
-            #endregion
-
-            #region 两个小圆球的反光
-            //上面的小的椭圆
-            Ellipse ellSmall = new Ellipse();
-            ellSmall.Width = 20;
-            ellSmall.Height = 10;
-            ellSmall.HorizontalAlignment = HorizontalAlignment.Left;
-            ellSmall.VerticalAlignment = VerticalAlignment.Top;
-            ellSmall.Margin = new Thickness(60, 40, 0, 0);
-            ellSmall.Fill = new SolidColorBrush(Color.FromArgb((byte)(255 * 0.5), 255, 255, 255));
-            ellSmall.Effect = new BlurEffect() { Radius = 10 };
-            //下面的大的椭圆
-            Ellipse ellBig = new Ellipse();
-            ellBig.Width = 40;
-            ellBig.Height = 20;
-            ellBig.HorizontalAlignment = HorizontalAlignment.Left;
-            ellBig.VerticalAlignment = VerticalAlignment.Top;
-            ellBig.Margin = new Thickness(30, 55, 0, 0);
-            ellBig.Fill = new SolidColorBrush(Color.FromArgb((byte)(255 * 0.5), 255, 255, 255));
-            ellBig.Effect = new BlurEffect() { Radius = 10 };
-            #endregion
-
-            Grid grid = new Grid() { Width = 200, Height = 200 };
-            grid.Children.Add(ellOuter);
-            grid.Children.Add(ellSmall);
-            grid.Children.Add(ellBig);
-            grid.Children.Add(pathMoon);
-
-            Viewbox vb = new Viewbox();
-            vb.Child = grid;
-            vb.Width = diameter;
-            vb.Height = diameter;
-
-            return vb;
-        }
-        #endregion
-        #region 外部大气泡动画
-        /// <summary>
-        /// 外部大气泡动画
-        /// </summary>
-        private void OuterBigBubbleAnimation()
-        {
-            for (int i = 0; i < _outerBigBubbleInfoList.Count; i++)
-            {
-                BubbleInfo info = _outerBigBubbleInfoList[i];
-                UIElement bubble = info.Bubble;
-                if (info.Moved <= info.Distance)
-                {
-                    double cvsTop = Canvas.GetTop(bubble);
-                    Canvas.SetTop(bubble, cvsTop - info.Velocity);
-                    info.Moved += info.Velocity;
-                }
-                else
-                {
-                    cvs_Outer.Children.Remove(bubble);
-                    _outerBigBubbleInfoList.Remove(info);
-                    i--;
-                }
-            }
-        }
-        #endregion
-        #region 添加外部大气泡
-        /// <summary>
-        /// 添加外部大气泡
-        /// </summary>
-        private void AddOuterBigBubble()
-        {
-            //大气泡 半径6-10 在Canvers中部20-30 速率0.2-0.5 距离30-60
-            if (_outerBigBubbleInfoList.Count < _maxOuterBigBubbleCount)
-            {
-                int size = _rd.Next(6, 11);
-                Viewbox bubble = GetBubble(size);
-                Canvas.SetLeft(bubble, _rd.Next(20, 31) - size / 2);
-                Canvas.SetTop(bubble, 100 - size / 2);
-                cvs_Outer.Children.Add(bubble);
-
-                BubbleInfo info = new BubbleInfo();
-                info.Velocity = _rd.Next(20, 51) / 100.00;
-                info.Distance = _rd.Next(30, 61);
-                info.Bubble = bubble;
-
-                _outerBigBubbleInfoList.Add(info);
-            }
-        }
-        #endregion
-        #region 外部小气泡动画
-        /// <summary>
-        /// 外部小气泡动画
-        /// </summary>
-        private void OuterSmallBubbleAnimation()
-        {
-            for (int i = 0; i < _outerSmallBubbleInfoList.Count; i++)
-            {
-                BubbleInfo info = _outerSmallBubbleInfoList[i];
-                UIElement bubble = info.Bubble;
-                if (info.Moved <= info.Distance)
-                {
-                    double cvsTop = Canvas.GetTop(bubble);
-                    Canvas.SetTop(bubble, cvsTop - info.Velocity);
-                    info.Moved += info.Velocity;
-                }
-                else
-                {
-                    cvs_Outer.Children.Remove(bubble);
-                    _outerSmallBubbleInfoList.Remove(info);
-                    i--;
-                }
-            }
-        }
-        #endregion
-        #region 添加外部小气泡
-        /// <summary>
-        /// 添加外部小气泡
-        /// </summary>
-        private void AddOuterSmallBubble()
-        {
-            //小气泡 半径2-5 在整个Canvers随机分散0-50 速率0.4-1.0 距离10-100
-            if (_outerSmallBubbleInfoList.Count < _maxOuterSmallBubbleCount)
-            {
-                int size = _rd.Next(2, 6);
-                Ellipse bubble = new Ellipse() { Width = size, Height = size, Fill = new SolidColorBrush(Color.FromRgb(15, 190, 9)) };
-                Canvas.SetLeft(bubble, _rd.Next(0, 51) - size / 2);
-                Canvas.SetTop(bubble, 100 - size / 2);
-                cvs_Outer.Children.Add(bubble);
-
-                BubbleInfo info = new BubbleInfo();
-                info.Velocity = _rd.Next(40, 101) / 100.00;
-                info.Distance = _rd.Next(10, 201);
-                info.Bubble = bubble;
-
-                _outerSmallBubbleInfoList.Add(info);
-            }
-        }
-        #endregion
-        #region 内部气泡动画
-        /// <summary>
-        /// 内部气泡动画
-        /// </summary>
-        private void InnerBubbleAnimation()
-        {
-            for (int i = 0; i < _innerBubbleInfoList.Count; i++)
-            {
-                BubbleInfo info = _innerBubbleInfoList[i];
-                UIElement bubble = info.Bubble;
-                if (info.Moved <= info.Distance)
-                {
-                    double cvsTop = Canvas.GetTop(bubble);
-                    Canvas.SetTop(bubble, cvsTop - info.Velocity);
-                    info.Moved += info.Velocity;
-                }
-                else
-                {
-                    _innerBubbleInfoList.Remove(info);
-                    i--;
-                }
-            }
-        }
-        #endregion
-        #region 添加内部气泡
-        /// <summary>
-        /// 添加内部气泡
-        /// </summary>
-        private void AddInnerBubble()
-        {
-            //小气泡 半径4-8 在整个Canvers随机分散5-45 速率0.05-0.1 距离5-15
-            if (_innerBubbleInfoList.Count < _maxInnerBubbleCount)
-            {
-                int size = _rd.Next(4, 9);
-                Viewbox bubble = GetBubble(size);
-                Canvas.SetLeft(bubble, _rd.Next(5, 46) - size / 2);
-                Canvas.SetTop(bubble, 100 - rec_Water.Height - size / 2);
-
-                BubbleInfo info = new BubbleInfo();
-                info.Velocity = _rd.Next(5, 11) / 100.00;
-                info.Distance = _rd.Next(5, 16);
-                info.Bubble = bubble;
-
-                _innerBubbleInfoList.Add(info);
-            }
-        }
-        #endregion
-
-        #endregion
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
-            _worker.WorkerSupportsCancellation = true;
-            _worker.WorkerReportsProgress = true;
-            _worker.DoWork += _worker_DoWork;
-            _worker.ProgressChanged += _worker_ProgressChanged;
-            _worker.RunWorkerAsync();
-        }
-    }
-
-    /// <summary>
-    /// 气泡信息
-    /// </summary>
-    public class BubbleInfo
-    {
-        /// <summary>
-        /// 速率(每帧移动的距离)
-        /// </summary>
-        public double Velocity { get; set; }
-        /// <summary>
-        /// 距离
-        /// </summary>
-        public double Distance { get; set; }
-        /// <summary>
-        /// 已经移动的距离
-        /// </summary>
-        public double Moved { get; set; }
-        /// <summary>
-        /// 气泡
-        /// </summary>
-        public UIElement Bubble { get; set; }
     }
 }

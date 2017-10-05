@@ -10,27 +10,74 @@
       Title="PlayerData">
 
     <Grid>
-        <TabControl x:Name="TabControl" HorizontalAlignment="Left" Height="477" Style="{StaticResource TopTabControl}" VerticalAlignment="Top" Width="681" Margin="0,1,0,0">
-            <TabItem Header="版本下载" control:ControlAttachProperty.FIcon="&#xe62a;" Width="170">
+        <TabControl x:Name="TabControls" HorizontalAlignment="Left" Height="477" Style="{StaticResource TopTabControl}" VerticalAlignment="Top" Width="681" Margin="0,1,0,0">
+            <TabItem Header="版本下载" Name="Verdown" control:ControlAttachProperty.FIcon="&#xe62a;" Width="170" IsSelected="True" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
                 <Grid Background="Transparent" Loaded="Grid_Loaded">
-                    <ListView Style="{StaticResource DefaultListView}" x:Name="listView" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0">
-                        <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource DefaultGridViewColumnHeader}">
-                                <GridViewColumn Header="版本" DisplayMemberBinding="{Binding Version}" Width="200"></GridViewColumn>
-                                <GridViewColumn Header="时间" DisplayMemberBinding="{Binding Time}" Width="200"></GridViewColumn>
-                                <GridViewColumn Header="类型" Width="255">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <TextBlock Name="textblock" Loaded="textblock_Loaded" Margin="0,7,0,0" Text="{Binding Name}" Tag="{Binding Url}" TextAlignment="Center" Foreground="White"></TextBlock>
-                                                <local:Button Click="FButton_Click" x:Name="fb" Margin="160,0,0,0" FIcon="&#xe639;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}" Tag="{Binding Url}"></local:Button>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <control:Accordion >
+                        <control:AccordionItem Header="正式版本" IsSelected="True" >
+                            <control:AccordionItem.Content>
+                                <ListView Style="{StaticResource DefaultListView}" x:Name="ListView" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                                    <ListView.View>
+                                        <GridView ColumnHeaderContainerStyle="{StaticResource DefaultGridViewColumnHeader}">
+                                            <GridViewColumn Header="版本" DisplayMemberBinding="{Binding Version}" Width="200"></GridViewColumn>
+                                            <GridViewColumn Header="时间" DisplayMemberBinding="{Binding Time}" Width="200"></GridViewColumn>
+                                            <GridViewColumn Header="类型" Width="255">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <TextBlock Name="textblock" Loaded="textblock_Loaded" Margin="0,7,0,0" Text="{Binding Name}" Tag="{Binding Url}" TextAlignment="Center" Foreground="White"></TextBlock>
+                                                            <local:Button Click="FButton_Click" x:Name="fb" Margin="160,0,0,0" FIcon="&#xe639;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}" Tag="{Binding Url}"></local:Button>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </control:AccordionItem.Content>
+                        </control:AccordionItem>
+                        <control:AccordionItem Header="快照版本">
+                            <ListView Style="{StaticResource DefaultListView}" x:Name="ListView001" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0">
+                                <ListView.View>
+                                    <GridView ColumnHeaderContainerStyle="{StaticResource DefaultGridViewColumnHeader}">
+                                        <GridViewColumn Header="版本" DisplayMemberBinding="{Binding Version}" Width="200"></GridViewColumn>
+                                        <GridViewColumn Header="时间" DisplayMemberBinding="{Binding Time}" Width="200"></GridViewColumn>
+                                        <GridViewColumn Header="类型" Width="255">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock Name="textblock" Loaded="textblock_Loaded" Margin="0,7,0,0" Text="{Binding Name}" Tag="{Binding Url}" TextAlignment="Center" Foreground="White"></TextBlock>
+                                                        <local:Button Click="FButton_Click" x:Name="fb" Margin="160,0,0,0" FIcon="&#xe639;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}" Tag="{Binding Url}"></local:Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </control:AccordionItem>
+                        <control:AccordionItem Header="远古版本">
+                            <ListView Style="{StaticResource DefaultListView}" x:Name="ListView002" HorizontalAlignment="Left" Height="437" VerticalAlignment="Top" Width="681" Background="{x:Null}" Margin="0,0,-2,0">
+                                <ListView.View>
+                                    <GridView ColumnHeaderContainerStyle="{StaticResource DefaultGridViewColumnHeader}">
+                                        <GridViewColumn Header="版本" DisplayMemberBinding="{Binding Version}" Width="200"></GridViewColumn>
+                                        <GridViewColumn Header="时间" DisplayMemberBinding="{Binding Time}" Width="200"></GridViewColumn>
+                                        <GridViewColumn Header="类型" Width="255">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock Name="textblock" Loaded="textblock_Loaded" Margin="0,7,0,0" Text="{Binding Name}" Tag="{Binding Url}" TextAlignment="Center" Foreground="White"></TextBlock>
+                                                        <local:Button Click="FButton_Click" x:Name="fb" Margin="160,0,0,0" FIcon="&#xe639;" Width="30" Height="30" Style="{StaticResource FButton_Transparency}" Tag="{Binding Url}"></local:Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </control:AccordionItem>
+
+                    </control:Accordion>
                 </Grid>
             </TabItem>
             <TabItem Header="Forge下载" control:ControlAttachProperty.FIcon="&#xe631;" Width="170">
@@ -56,7 +103,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="LiteLoader下载" control:ControlAttachProperty.FIcon="&#xe61f;" Width="170">
-                <Grid Background="Transparent"/>
+                
             </TabItem>
             <TabItem Header="OptiFine下载" control:ControlAttachProperty.FIcon="&#xe64d;" Width="171">
                 <Grid Background="Transparent"/>

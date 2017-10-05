@@ -19,8 +19,8 @@ namespace BanlieueCraft_Lanucher
         {
             try
             {
-                string deskTop = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
-                string dirPath = System.Environment.CurrentDirectory;
+                string deskTop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string dirPath = Environment.CurrentDirectory;
                 string exePath = Process.GetCurrentProcess().MainModule.FileName;
                 //System.Diagnostics.FileVersionInfo exeInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(exePath);
                 if (System.IO.File.Exists(string.Format(@"{0}\{1}.lnk", deskTop, name)))

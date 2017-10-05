@@ -160,7 +160,7 @@
         <Setter Property="Background" Value="{StaticResource ItemsContentBackground}" />
         <Setter Property="BorderThickness" Value="1" />
         <!--False会关闭虚拟化-->
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="False"></Setter>
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
@@ -179,7 +179,7 @@
                 <ControlTemplate TargetType="ListView">
                     <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                        <ScrollViewer Padding="{TemplateBinding Padding}" Style="{StaticResource for_scrollviewer}">
+                        <ScrollViewer Padding="{TemplateBinding Padding}" Style="{StaticResource ForScrollviewer}">
                             <ItemsPresenter/>
                         </ScrollViewer>
                     </Border>

@@ -43,7 +43,7 @@
                             <ContentControl x:Name="Label" Margin="1" Template="{TemplateBinding control:ControlAttachProperty.LabelTemplate}"
                                             Content="{TemplateBinding control:ControlAttachProperty.Label}"/>
                             <!--内容区域-->
-                            <ScrollViewer x:Name="PART_ContentHost" BorderThickness="0" Grid.Column="1" IsTabStop="False" Margin="2"
+                            <ScrollViewer x:Name="PART_ContentHost1" BorderThickness="0" Grid.Column="1" IsTabStop="False" Margin="2"
                                           VerticalAlignment="Stretch" Background="{x:Null}" />
                             <!--水印-->
                             <TextBlock x:Name="Message"  Padding="{TemplateBinding Padding}" Visibility="Collapsed"
@@ -77,7 +77,7 @@
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter TargetName="PART_AttachContent" Property="IsEnabled" Value="False" />
                             <Setter TargetName="Bg" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
-                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
+                            <Setter TargetName="PART_ContentHost1" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
                             <Setter TargetName="Label" Property="Opacity" Value="{StaticResource ReadonlyOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -103,8 +103,8 @@
         <Setter Property="control:ControlAttachProperty.LabelTemplate" >
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
-                    <Border Width="60" Background="{StaticResource TextLabelBackground}">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3" Text="{TemplateBinding Content}"></TextBlock>
+                    <Border Width="60" Background="{x:Null}">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Text="{TemplateBinding Content}" FontWeight="Bold"></TextBlock>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -115,8 +115,8 @@
         <Setter Property="control:ControlAttachProperty.LabelTemplate" >
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
-                    <Border Width="60" Background="{StaticResource TextLabelBackground}">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0" Text="{TemplateBinding Content}"></TextBlock>
+                    <Border Width="60" Background="{x:Null}">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Text="{TemplateBinding Content}" FontWeight="Bold"></TextBlock>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -175,6 +175,60 @@
                                control:ControlAttachProperty.IsSaveFileButtonBehaviorEnabled="True" Command="control:ControlAttachProperty.SaveFileCommand" 
                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"
                                Margin="0,1,0,1"  FIconSize="20" Foreground="{StaticResource TextForeground}" Cursor="Hand"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style x:Key="DefaultRichTextBox" TargetType="{x:Type RichTextBox}">
+        <Setter Property="SelectionBrush" Value="{StaticResource TextSelectionBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource ControlBorderBrush}" />
+        <Setter Property="MinHeight" Value="26" />
+        <Setter Property="MinWidth" Value="10" />
+        <Setter Property="Background" Value="{StaticResource TextBackground}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="CaretBrush" Value="{StaticResource TextForeground}" />
+        <Setter Property="control:ControlAttachProperty.FocusBorderBrush" Value="{StaticResource FocusBorderBrush}" />
+        <Setter Property="control:ControlAttachProperty.MouseOverBorderBrush" Value="{StaticResource MouseOverBorderBrush}" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="AllowDrop" Value="True" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+        <!--该值指示是否启用了笔势-->
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <!--SnapsToDevicePixels:该值来确定呈现此元素是否应使用特定于设备的像素设置-->
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Grid>
+                        <Border x:Name="Bd"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ScrollViewer  x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Style="{DynamicResource ForScrollviewer}" >
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{Binding Path=(control:ControlAttachProperty.MouseOverBorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(control:ControlAttachProperty.FocusBorderBrush),RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.85" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -18,6 +18,10 @@
                 <ResourceDictionary Source="/Style/ListBox.xaml"/>
                 <ResourceDictionary Source="/Style/ScrollViewer.xaml"/>
                 <ResourceDictionary Source="/Style/TablControl.xaml"/>
+                <ResourceDictionary Source="/Style/Accordion.xaml"/>
+                <ResourceDictionary Source="/Style/ProcessBar.xaml"/>
+                <ResourceDictionary Source="/Style/Pro.xaml"/>
+                <ResourceDictionary Source="/Style/Password.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

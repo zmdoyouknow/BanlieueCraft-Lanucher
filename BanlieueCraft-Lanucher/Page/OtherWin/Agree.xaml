@@ -1,0 +1,40 @@
+﻿<Window x:Class="BanlieueCraft_Lanucher.Agree"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BanlieueCraft_Lanucher"
+        mc:Ignorable="d"
+        Title="Agree" Height="300" Width="320" WindowStyle="None" Background="#FF1A1D33" AllowsTransparency="True" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBlock Grid.Row="0" x:Name="Text" HorizontalAlignment="Left" Height="24" Margin="22,5,0,0" TextWrapping="Wrap" Text="注册提示" VerticalAlignment="Top" Width="148" Foreground="White" TextAlignment="Left" FontFamily="Microsoft YaHei" FontSize="14" RenderTransformOrigin="0.446,1.609" FontWeight="Bold"/>
+        <Line Grid.Row="0" X1="0" Y1="30" X2="320" Y2="30" Stroke="#00abdc" StrokeThickness="1"></Line>
+        <ScrollViewer Name="Sv" Margin="0,29,0,60" Style="{StaticResource ForScrollviewer}" ScrollChanged="ScrollViewer_ScrollChanged">
+            <Grid>
+                <TextBlock Text="服 务 器 规 章" Margin="0,-230,0,0" Height="20" Width="100" FontWeight="Bold" FontSize="14" TextAlignment="Center">
+                </TextBlock>
+                <TextBlock TextWrapping="WrapWithOverflow"  Margin="0,30,0,0">
+                    一：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/> 
+                    <LineBreak/> 
+                    二：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/>
+                    <LineBreak/>
+                    三：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/>
+                    <LineBreak/>
+                    四：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/>
+                    <LineBreak/>
+                    五：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/>
+                    <LineBreak/>
+                    六：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/>
+                    <LineBreak/>
+                    七：不要艾特私聊送花回复腐竹，有事找管理。<LineBreak/>
+                    <LineBreak/>
+                </TextBlock>
+            </Grid>
+        </ScrollViewer>
+        <CheckBox x:Name="CheckBox" IsEnabled="False" Content="CheckBox" HorizontalAlignment="Left" Height="16" Margin="22,253,0,0" VerticalAlignment="Top" Width="134" Foreground="White"/>
+        <Button x:Name="Button" Content="Button" HorizontalAlignment="Left" Height="19" Margin="44,274,0,0" VerticalAlignment="Top" Width="56"/>
+        <Button x:Name="Button1" Content="Button" HorizontalAlignment="Left" Height="19" Margin="177,274,0,0" VerticalAlignment="Top" Width="78"/>
+        <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Height="16" Margin="193,253,0,0" VerticalAlignment="Top" Width="103" Foreground="#FFFDF2F2"/>
+    </Grid>
+</Window>

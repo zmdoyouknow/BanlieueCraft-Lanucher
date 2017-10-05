@@ -39,8 +39,8 @@ namespace BanlieueCraft_Lanucher
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine( FindJava.JavaList()[1]);
-           
+            var login = new Login();
+            login.ShowDialog();
 
         }
 
@@ -93,8 +93,7 @@ namespace BanlieueCraft_Lanucher
         private void Server()
         {
             var mcinfo = new MCQuery.McQuery();
-            string host = "127.0.0.1";
-            mcinfo.Connect(host);
+            mcinfo.Connect("127.0.0.1");
             if (mcinfo.Success())
             {
                 var info = mcinfo.Info();

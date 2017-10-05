@@ -3,6 +3,8 @@ using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using BanlieueCraft_Lanucher.Control;
+using System.IO;
+using System.Linq;
 
 namespace BanlieueCraft_Lanucher.Page
 {
@@ -18,11 +20,6 @@ namespace BanlieueCraft_Lanucher.Page
             DataContext = uvm;
         }
 
-        private void Btn_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("222222222");
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
@@ -30,7 +27,20 @@ namespace BanlieueCraft_Lanucher.Page
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-           // Frame.Navigate(new Uri("/Page/GameVersion.xaml", UriKind.Relative));
+            var theFolder = new DirectoryInfo(Environment.CurrentDirectory + @"\.minecraft\versions");
+            var dfolder = theFolder.GetDirectories("1.12",SearchOption.TopDirectoryOnly);
+            foreach (var dname in dfolder)
+            {
+                if (dname != null)
+                {
+                    Image.Tag = dname.Name;
+                    //Console.WriteLine(dname.Name);
+                }
+                else
+                {
+                    Image.Tag = "未找到指定版本";
+                }
+            }
         }
     }
 }
